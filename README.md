@@ -1,11 +1,14 @@
 # Remotion videos
 
-Four motion graphics built with [Remotion](https://remotion.dev): two landscape 1920×1080 intros and two vertical 1080×1920 videos (one with voiceover).
+Five motion graphics built with [Remotion](https://remotion.dev): two landscape
+1920×1080 intros and three vertical 1080×1920 videos, two of them data stories
+with voiceover.
 
 | Composition | Output | What it is |
 |---|---|---|
-| `MufaqarVertical` | `out/mufaqar-vertical.mp4` | 24s vertical (9:16) personal intro — hero, track record, services, stack, contact |
+| `SteelProducers` | `out/steel-producers.mp4` | 58s vertical (9:16) data story with voiceover — the largest steel producers in the world, 2024 |
 | `RichestCountries` | `out/richest-countries-1960-2024.mp4` | 76s vertical (9:16) data story with voiceover — top 10 richest countries, 1960 vs 2024 |
+| `MufaqarVertical` | `out/mufaqar-vertical.mp4` | 24s vertical (9:16) personal intro — hero, track record, services, stack, contact |
 | `MufaqarIntro` | `out/mufaqar-intro.mp4` | Personal brand intro — Mufaqar · WordPress Developer · mufaqar.com |
 | `ShowcaseIntro` | `out/showcase-intro.mp4` | Generic Remotion showcase intro |
 
@@ -73,6 +76,57 @@ python scripts/voiceover_countries.py
 - **Narration** — `scripts/voiceover_countries.py`
 - **Scenes** — `src/countries/*.tsx` (`IntroScene`, `ListScene`, `ShiftsScene`, `OutroScene`)
 
+## SteelProducers (9:16, with voiceover)
+
+**Output:** `out/steel-producers.mp4` — 1080×1920, 58s, 30fps, H.264 + AAC voiceover.
+Poster: `out/steel-producers-poster.png` (frame 950).
+
+Top 10 crude steel producers in 2024, from World Steel Association (worldsteel)
+figures in million tonnes.
+
+| Rank | Country | Mt | % of world | YoY |
+|---|---|---|---|---|
+| 1 | China | 1,005.1 | 53.3% | −2.3% |
+| 2 | India | 149.4 | 7.9% | +6.1% |
+| 3 | Japan | 84.0 | 4.5% | −3.4% |
+| 4 | United States | 79.5 | 4.2% | −2.3% |
+| 5 | Russia | 71.0 | 3.8% | −6.6% |
+| 6 | South Korea | 63.6 | 3.4% | −4.7% |
+| 7 | Germany | 37.3 | 2.0% | +5.4% |
+| 8 | Türkiye | 36.9 | 2.0% | +9.5% |
+| 9 | Brazil | 33.9 | 1.8% | +5.9% |
+| 10 | Iran | 31.4 | 1.7% | +2.3% |
+
+World total: **1,886.3 Mt** in 2024, down 0.9% from 1,904.1 Mt in 2023.
+
+| # | Scene | Narration |
+|---|-------|-----------|
+| 01 | Title — STEEL · The largest producers · 1,886.3 Mt · 2024 | "Nearly two billion tonnes of steel are poured every year…" |
+| 02 | Animated top-10 bar chart with country codes, Mt and % of world | "China alone produced just over one billion tonnes…" |
+| 03 | The outlier — 53.3% of world output, China vs the next nine (1.7×) | "That is fifty-three percent of all steel made on Earth…" |
+| 04 | Momentum — 2023 → 2024 change, Türkiye +9.5% to Russia −6.6% | "But the momentum is shifting…" |
+| 05 | One country. Half the steel. + source credit | "Which producer surprised you the most?" |
+
+Scene lengths are **computed from the audio** in `calculateMetadata`
+(`getAudioDuration`), so re-generating the voiceover re-times the whole video.
+
+### Regenerating the voiceover
+
+```bash
+python scripts/voiceover_steel.py
+```
+
+- Voice: `en-US-GuyNeural` at `+6%` — change `VOICE` / `RATE` in the script.
+- Narration text: the `SCENES` list in `scripts/voiceover_steel.py`.
+- Audio lands in `public/voiceover/steel/*.mp3`.
+
+### Editing the data
+
+- **Producers / values / YoY / shares** — `src/steel/data.ts`
+- **Narration** — `scripts/voiceover_steel.py`
+- **Scenes** — `src/steel/*.tsx` (`IntroScene`, `TopProducersScene`, `DominanceScene`, `MomentumScene`, `OutroScene`)
+- **Palette** — `src/steel/theme.ts` (gunmetal, molten orange, steel)
+
 ## MufaqarIntro
 
 **Output:** `out/mufaqar-intro.mp4` — H.264, ~3.9 MB, 12s, silent.
@@ -107,11 +161,13 @@ npm run build            # render out/mufaqar-intro.mp4
 npm run build:showcase   # render out/showcase-intro.mp4
 npm run build:vertical   # render out/mufaqar-vertical.mp4 (9:16)
 npm run build:countries  # render out/richest-countries-1960-2024.mp4 (9:16 + voice)
+npm run build:steel      # render out/steel-producers.mp4 (9:16 + voice)
 
 npm run still            # out/mufaqar-poster.png (frame 60)
 npm run still:showcase   # out/poster.png (frame 60)
 npm run still:vertical   # out/mufaqar-vertical-poster.png (frame 140)
 npm run still:countries  # out/richest-countries-poster.png (frame 1330)
+npm run still:steel      # out/steel-producers-poster.png (frame 950)
 ```
 
 Render any single frame:
@@ -158,9 +214,22 @@ src/
     ListScene.tsx           scenes 02/03 — animated top-10 lists
     ShiftsScene.tsx         scene 04 — biggest changes
     OutroScene.tsx          scene 05 — closing card
+  steel/                    vertical steel data story with voiceover
+    data.ts                 worldsteel 2024 values, shares, YoY moves
+    theme.ts                gunmetal / molten orange / steel palette
+    SteelProducers.tsx      audio-driven scene timing + composition
+    SteelBackground.tsx     furnace glow, roller lines, sparks, I-beams
+    SteelHud.tsx            progress rail, label chip, source line
+    IntroScene.tsx          scene 01 — title card
+    TopProducersScene.tsx   scene 02 — animated top-10 bar chart
+    DominanceScene.tsx      scene 03 — 53.3% world share + comparison
+    MomentumScene.tsx       scene 04 — diverging YoY change bars
+    OutroScene.tsx          scene 05 — closing card
 scripts/
-  voiceover_countries.py    edge-tts narration generator
+  voiceover_countries.py    edge-tts narration generator (countries)
+  voiceover_steel.py        edge-tts narration generator (steel)
 public/voiceover/countries/ scene-by-scene MP3 narration
+public/voiceover/steel/     scene-by-scene MP3 narration
 ```
 
 ## Skills
@@ -178,9 +247,8 @@ npx skills update
 
 - All animation is driven by `useCurrentFrame()` / `spring()` / `interpolate()` —
   no CSS animations or transitions, per Remotion rendering rules.
-- Both videos are silent. For music, drop a file in `public/` and add
+- `MufaqarIntro`, `ShowcaseIntro` and `MufaqarVertical` are silent. The data
+  stories carry a voiceover; for music, drop a file in `public/` and add
   `<Audio src={staticFile("track.mp3")} />` to the composition.
 - `TOTAL_FRAMES` in `src/timeline.ts` is 360 (12s at 30fps). If you change scene
   offsets, update the composition `durationInFrames` in `src/Root.tsx` to match.
-#   W o r l d l y F a c t s D a i l y  
- 

@@ -42,6 +42,10 @@ export const MomentumScene: React.FC<{ durationInFrames: number }> = ({
     config: { damping: 200 },
   });
 
+  const stagger = Math.round(
+    Math.min(28, Math.max(14, (durationInFrames - 160) / 9)),
+  );
+
   return (
     <AbsoluteFill
       style={{
@@ -108,7 +112,7 @@ export const MomentumScene: React.FC<{ durationInFrames: number }> = ({
 
         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           {MOMENTUM.map((entry, i) => {
-            const delay = 16 + i * 14;
+            const delay = 16 + i * stagger;
             const positive = entry.yoy > 0;
             const color = positive ? palette.green : palette.red;
 
@@ -174,6 +178,17 @@ export const MomentumScene: React.FC<{ durationInFrames: number }> = ({
                   <div
                     style={{
                       position: "absolute",
+                      left: 0,
+                      right: 0,
+                      top: 5,
+                      height: 20,
+                      borderRadius: 5,
+                      backgroundColor: "rgba(159,179,200,0.06)",
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
                       left: "50%",
                       top: -6,
                       bottom: -6,
@@ -226,7 +241,7 @@ export const MomentumScene: React.FC<{ durationInFrames: number }> = ({
             opacity: spring({
               frame,
               fps,
-              delay: 150,
+              delay: durationInFrames - 96,
               durationInFrames: 26,
               config: { damping: 200 },
             }),

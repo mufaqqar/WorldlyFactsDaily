@@ -24,6 +24,7 @@ import {
 const CHINA_SHARE = (CHINA_VALUE / WORLD_2024) * 100;
 const REST = WORLD_2024 - CHINA_VALUE;
 const NEXT_RATIO = NEXT_NINE_TOTAL / CHINA_VALUE;
+const CHINA_VS_NEXT = CHINA_VALUE / NEXT_NINE_TOTAL;
 
 export const DominanceScene: React.FC<{ durationInFrames: number }> = ({
   durationInFrames,
@@ -70,18 +71,18 @@ export const DominanceScene: React.FC<{ durationInFrames: number }> = ({
   const compareIn = spring({
     frame,
     fps,
-    delay: 62,
+    delay: 74,
     durationInFrames: 36,
     config: { damping: 200 },
   });
 
-  const chinaBar = interpolate(frame, [70, 108], [0, 100], {
+  const chinaBar = interpolate(frame, [84, 124], [0, 100], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
     easing: Easing.out(Easing.cubic),
   });
 
-  const nineBar = interpolate(frame, [82, 120], [0, NEXT_RATIO * 100], {
+  const nineBar = interpolate(frame, [98, 140], [0, NEXT_RATIO * 100], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
     easing: Easing.out(Easing.cubic),
@@ -90,8 +91,8 @@ export const DominanceScene: React.FC<{ durationInFrames: number }> = ({
   const ratioIn = spring({
     frame,
     fps,
-    delay: 116,
-    durationInFrames: 28,
+    delay: 140,
+    durationInFrames: 30,
     config: { damping: 200 },
   });
 
@@ -264,7 +265,7 @@ export const DominanceScene: React.FC<{ durationInFrames: number }> = ({
           >
             <span>China vs the next nine</span>
             <span style={{ color: palette.hot }}>
-              {NEXT_RATIO.toFixed(1)}×
+              {CHINA_VS_NEXT.toFixed(1)}×
             </span>
           </div>
 

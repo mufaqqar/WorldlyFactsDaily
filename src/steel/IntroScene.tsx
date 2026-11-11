@@ -32,15 +32,15 @@ export const IntroScene: React.FC<{ durationInFrames: number }> = ({
   const steelIn = spring({
     frame,
     fps,
-    delay: 5,
-    durationInFrames: 42,
+    delay: 8,
+    durationInFrames: 48,
     config: { damping: 14, stiffness: 105 },
   });
 
   const ruleIn = spring({
     frame,
     fps,
-    delay: 20,
+    delay: 40,
     durationInFrames: 30,
     config: { damping: 200 },
   });
@@ -48,15 +48,15 @@ export const IntroScene: React.FC<{ durationInFrames: number }> = ({
   const titleIn = spring({
     frame,
     fps,
-    delay: 24,
-    durationInFrames: 40,
+    delay: 52,
+    durationInFrames: 44,
     config: { damping: 18, stiffness: 110 },
   });
 
   const pillIn = spring({
     frame,
     fps,
-    delay: 42,
+    delay: 92,
     durationInFrames: 34,
     config: { damping: 15, stiffness: 120 },
   });
@@ -64,8 +64,8 @@ export const IntroScene: React.FC<{ durationInFrames: number }> = ({
   const noteIn = spring({
     frame,
     fps,
-    delay: 54,
-    durationInFrames: 28,
+    delay: 112,
+    durationInFrames: 30,
     config: { damping: 200 },
   });
 

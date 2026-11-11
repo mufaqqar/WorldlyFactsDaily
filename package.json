@@ -9,10 +9,12 @@
     "build:showcase": "remotion render ShowcaseIntro out/showcase-intro.mp4",
     "build:vertical": "remotion render MufaqarVertical out/mufaqar-vertical.mp4",
     "build:countries": "remotion render RichestCountries out/richest-countries-1960-2024.mp4",
+    "build:steel": "remotion render SteelProducers out/steel-producers.mp4",
     "still": "remotion still MufaqarIntro out/mufaqar-poster.png --frame=60",
     "still:showcase": "remotion still ShowcaseIntro out/poster.png --frame=60",
     "still:vertical": "remotion still MufaqarVertical out/mufaqar-vertical-poster.png --frame=140",
     "still:countries": "remotion still RichestCountries out/richest-countries-poster.png --frame=1330",
+    "still:steel": "remotion still SteelProducers out/steel-producers-poster.png --frame=950",
     "upgrade": "remotion upgrade"
   },
   "dependencies": {

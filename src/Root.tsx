@@ -10,10 +10,27 @@ import {
   RichestCountries,
   WIDTH as RICHEST_WIDTH,
 } from "./countries/RichestCountries";
+import {
+  calculateMetadata as calculateSteelMetadata,
+  FPS as STEEL_FPS,
+  HEIGHT as STEEL_HEIGHT,
+  SteelProducers,
+  WIDTH as STEEL_WIDTH,
+} from "./steel/SteelProducers";
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="SteelProducers"
+        component={SteelProducers}
+        durationInFrames={1740}
+        fps={STEEL_FPS}
+        width={STEEL_WIDTH}
+        height={STEEL_HEIGHT}
+        defaultProps={{ sceneFrames: [295, 443, 294, 390, 318] }}
+        calculateMetadata={calculateSteelMetadata}
+      />
       <Composition
         id="RichestCountries"
         component={RichestCountries}

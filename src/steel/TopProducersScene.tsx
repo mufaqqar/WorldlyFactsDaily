@@ -57,7 +57,9 @@ export const TopProducersScene: React.FC<{ durationInFrames: number }> = ({
     config: { damping: 15, stiffness: 110 },
   });
 
-  const stagger = 25;
+  const stagger = Math.round(
+    Math.min(32, Math.max(20, (durationInFrames - 170) / 9)),
+  );
 
   return (
     <AbsoluteFill
@@ -253,6 +255,18 @@ export const TopProducersScene: React.FC<{ durationInFrames: number }> = ({
                 >
                   {entry.share.toFixed(1)}%
                 </div>
+
+                {/* Bar track */}
+                <div
+                  style={{
+                    position: "absolute",
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    height: 4,
+                    backgroundColor: "rgba(159,179,200,0.08)",
+                  }}
+                />
 
                 {/* Value bar */}
                 <div

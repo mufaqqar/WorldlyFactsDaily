@@ -39,23 +39,23 @@ export const OutroScene: React.FC<{ durationInFrames: number }> = ({
   const lineOne = spring({
     frame,
     fps,
-    delay: 8,
-    durationInFrames: 40,
+    delay: 10,
+    durationInFrames: 42,
     config: { damping: 20, stiffness: 110 },
   });
 
   const lineTwo = spring({
     frame,
     fps,
-    delay: 18,
-    durationInFrames: 40,
+    delay: 30,
+    durationInFrames: 42,
     config: { damping: 20, stiffness: 110 },
   });
 
   const noteIn = spring({
     frame,
     fps,
-    delay: 40,
+    delay: 78,
     durationInFrames: 30,
     config: { damping: 200 },
   });
@@ -63,8 +63,8 @@ export const OutroScene: React.FC<{ durationInFrames: number }> = ({
   const creditIn = spring({
     frame,
     fps,
-    delay: 56,
-    durationInFrames: 28,
+    delay: 140,
+    durationInFrames: 30,
     config: { damping: 200 },
   });
 

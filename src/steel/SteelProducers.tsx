@@ -32,7 +32,7 @@ const AUDIO_FILES = [
   "05-outro.mp3",
 ];
 
-const FALLBACK_FRAMES = [360, 570, 420, 480, 330];
+const FALLBACK_FRAMES = [295, 443, 294, 390, 318];
 
 export const calculateMetadata: CalculateMetadataFunction<
   SteelProps

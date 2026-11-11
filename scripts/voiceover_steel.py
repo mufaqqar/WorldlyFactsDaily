@@ -25,8 +25,8 @@ SCENES = [
     ),
     (
         "02-top10",
-        "China alone produced one thousand and five million tonnes. India followed "
-        "with one hundred and forty-nine, then Japan, the United States and Russia. "
+        "China alone produced just over one billion tonnes. India followed with one "
+        "hundred and forty-nine million, then Japan, the United States and Russia. "
         "South Korea, Germany, Turkey, Brazil and Iran complete the top ten.",
     ),
     (
