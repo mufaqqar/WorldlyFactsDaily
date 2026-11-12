@@ -17,10 +17,28 @@ import {
   SteelProducers,
   WIDTH as STEEL_WIDTH,
 } from "./steel/SteelProducers";
+import {
+  calculateMetadata as calculateBillionairesMetadata,
+  FALLBACK_FRAMES as BILLIONAIRE_FRAMES,
+  FPS as BILLIONAIRE_FPS,
+  HEIGHT as BILLIONAIRE_HEIGHT,
+  RichestPeople,
+  WIDTH as BILLIONAIRE_WIDTH,
+} from "./billionaires/MainVideo";
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="RichestPeople"
+        component={RichestPeople}
+        durationInFrames={1761}
+        fps={BILLIONAIRE_FPS}
+        width={BILLIONAIRE_WIDTH}
+        height={BILLIONAIRE_HEIGHT}
+        defaultProps={{ sceneFrames: BILLIONAIRE_FRAMES }}
+        calculateMetadata={calculateBillionairesMetadata}
+      />
       <Composition
         id="SteelProducers"
         component={SteelProducers}

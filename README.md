@@ -1,11 +1,12 @@
 # Remotion videos
 
-Five motion graphics built with [Remotion](https://remotion.dev): two landscape
-1920×1080 intros and three vertical 1080×1920 videos, two of them data stories
+Six motion graphics built with [Remotion](https://remotion.dev): two landscape
+1920×1080 intros and four vertical 1080×1920 videos, three of them data stories
 with voiceover.
 
 | Composition | Output | What it is |
 |---|---|---|
+| `RichestPeople` | `out/richest-people.mp4` | 58s vertical (9:16) data story with voiceover + original score — the world's 10 richest people, Forbes 2026 |
 | `SteelProducers` | `out/steel-producers.mp4` | 58s vertical (9:16) data story with voiceover — the largest steel producers in the world, 2024 |
 | `RichestCountries` | `out/richest-countries-1960-2024.mp4` | 76s vertical (9:16) data story with voiceover — top 10 richest countries, 1960 vs 2024 |
 | `MufaqarVertical` | `out/mufaqar-vertical.mp4` | 24s vertical (9:16) personal intro — hero, track record, services, stack, contact |
@@ -127,6 +128,94 @@ python scripts/voiceover_steel.py
 - **Scenes** — `src/steel/*.tsx` (`IntroScene`, `TopProducersScene`, `DominanceScene`, `MomentumScene`, `OutroScene`)
 - **Palette** — `src/steel/theme.ts` (gunmetal, molten orange, steel)
 
+## RichestPeople (9:16, with voiceover + original score)
+
+**Output:** `out/richest-people.mp4` — 1080×1920, 58.18s, 30fps, H.264 + AAC
+voiceover and music.
+Thumbnail: `out/richest-people-thumbnail.png` (frame 1630).
+Publish copy: `out/richest-people-metadata.md`.
+
+The top 10 from **Forbes World's Billionaires 2026** — the 40th annual list,
+published **March 10, 2026**. Net worths are USD billions and are a snapshot at
+publication; they are not live values.
+
+| Rank | Person | Net worth | Company | Country |
+|---|---|---|---|---|
+| 1 | Elon Musk | $839B | Tesla · SpaceX | United States |
+| 2 | Larry Page | $257B | Google · Alphabet | United States |
+| 3 | Sergey Brin | $237B | Google · Alphabet | United States |
+| 4 | Jeff Bezos | $224B | Amazon | United States |
+| 5 | Mark Zuckerberg | $222B | Meta Platforms | United States |
+| 6 | Larry Ellison | $190B | Oracle | United States |
+| 7 | Bernard Arnault & family | $171B | LVMH | France |
+| 8 | Jensen Huang | $154B | Nvidia | Taiwan · U.S. |
+| 9 | Warren Buffett | $149B | Berkshire Hathaway | United States |
+| 10 | Amancio Ortega | $148B | Inditex · Zara | Spain |
+
+The wealth rail on every profile compares that fortune with Musk's $839B, so the
+scale of the #1 position is visible at a glance (Ortega is 18%, Musk is 100%).
+
+| # | Scene | Content |
+|---|-------|---------|
+| 01 | Intro | Count-up to 10, title, countdown pill, Forbes date |
+| 02–11 | Ranks 10 → 1 | Portrait, flag, animated rank numeral, gold net-worth counter, company, descriptor, wealth rail |
+| 12 | Outro | Crown question, follow CTA, 2026 champion recap, source |
+
+Scene lengths are **computed from the audio** in `calculateMetadata`
+(`getAudioDuration`) plus 0.2s of breathing room per scene. The final narration
+is 56.0s and the composition is 1,745 frames.
+
+### Regenerating the voiceover
+
+```bash
+python scripts/voiceover_billionaires.py
+```
+
+- Primary engine: ElevenLabs **Adam** (`pNInz6obpgDQGcFmaJgB`), model
+  `eleven_multilingual_v2`, speed 1.18, stability 0.42, similarity 0.82,
+  style 0.28, speaker boost on.
+- The script reads any key containing `ELEVEN` from `.env`.
+- If ElevenLabs is unavailable it falls back to edge-tts `en-US-GuyNeural` at
+  `+8%`; the video is never silent.
+- Narration text: the `SCENES` list in `scripts/voiceover_billionaires.py`.
+- Audio lands in `public/voiceover/billionaires/*.mp3`.
+
+### Regenerating the music + SFX
+
+```bash
+python scripts/audio_billionaires.py
+```
+
+Everything is synthesised from scratch with numpy — no samples and no licensing
+obligations. Outputs in `public/audio/`:
+
+- `music-billionaires.wav` — 62s D-minor documentary cue (drone, pad, arpeggio,
+  soft kick/hats, riser into the #1 reveal)
+- `sfx-whoosh.wav`, `sfx-tick.wav`, `sfx-impact.wav`, `sfx-shimmer.wav`
+
+The music is looped and sits at roughly 0.34 volume under the narration; the
+whoosh is 0.30, impacts 0.42–0.50, and the shimmer 0.24.
+
+### Editing the data and visuals
+
+- **People, net worths, companies, flags, portraits** — `src/billionaires/data.ts`
+- **Narration** — `scripts/voiceover_billionaires.py`
+- **Composition, scenes, audio mix** — `src/billionaires/MainVideo.tsx`
+- **Palette / gradients** — `src/billionaires/theme.ts`
+- **Reusable components** — `WealthCounter`, `AnimatedProgressBar`,
+  `RankingBadge`, `PortraitCard`, `BillionaireProfile`, `BillionairesBackground`,
+  `BillionairesHud`, `IntroScene`, `OutroScene`
+
+### Asset credits
+
+- Portraits: Wikimedia Commons contributors; per-file URLs and dimensions are
+  listed in `portrait-sources.json`. Licenses vary by file; check the original
+  file page before commercial reuse. `10-amancio-ortega.webp` is the only freely
+  available portrait (Malen Perez, CC BY-SA 4.0) and is intentionally treated
+  with grain and a heavier grade.
+- Flags: [flagcdn.com](https://flagcdn.com) PNGs.
+- Music and SFX: original synthesis by `scripts/audio_billionaires.py`.
+
 ## MufaqarIntro
 
 **Output:** `out/mufaqar-intro.mp4` — H.264, ~3.9 MB, 12s, silent.
@@ -162,12 +251,14 @@ npm run build:showcase   # render out/showcase-intro.mp4
 npm run build:vertical   # render out/mufaqar-vertical.mp4 (9:16)
 npm run build:countries  # render out/richest-countries-1960-2024.mp4 (9:16 + voice)
 npm run build:steel      # render out/steel-producers.mp4 (9:16 + voice)
+npm run build:billionaires # render out/richest-people.mp4 (9:16 + voice + score)
 
 npm run still            # out/mufaqar-poster.png (frame 60)
 npm run still:showcase   # out/poster.png (frame 60)
 npm run still:vertical   # out/mufaqar-vertical-poster.png (frame 140)
 npm run still:countries  # out/richest-countries-poster.png (frame 1330)
 npm run still:steel      # out/steel-producers-poster.png (frame 950)
+npm run still:billionaires # out/richest-people-thumbnail.png (frame 1630)
 ```
 
 Render any single frame:
@@ -225,11 +316,28 @@ src/
     DominanceScene.tsx      scene 03 — 53.3% world share + comparison
     MomentumScene.tsx       scene 04 — diverging YoY change bars
     OutroScene.tsx          scene 05 — closing card
+  billionaires/             vertical Forbes 2026 data story + score
+    data.ts                 top 10 people, net worths, portraits, flags, audio
+    theme.ts                navy / gold / electric-blue palette
+    MainVideo.tsx           audio-driven scenes, music bed, SFX, global fade
+    BillionairesBackground.tsx aurora, grid, ticker, market line, gold dust
+    BillionairesHud.tsx     progress bar, countdown rail, source line
+    IntroScene.tsx          scene 01 — 1 → 10 count and title
+    BillionaireProfile.tsx  scenes 02–11 — portrait, name, counter, wealth rail
+    PortraitCard.tsx        framed portrait, flag chips, grain, light sweep
+    WealthCounter.tsx       gold count-up net worth
+    AnimatedProgressBar.tsx wealth vs. world #1
+    RankingBadge.tsx        oversized rank numeral + 10-step rail
+    OutroScene.tsx          scene 12 — crown question + follow CTA
 scripts/
   voiceover_countries.py    edge-tts narration generator (countries)
   voiceover_steel.py        edge-tts narration generator (steel)
+  voiceover_billionaires.py ElevenLabs/edge-tts narration generator (billionaires)
+  audio_billionaires.py     original numpy music + SFX synthesis
 public/voiceover/countries/ scene-by-scene MP3 narration
 public/voiceover/steel/     scene-by-scene MP3 narration
+public/voiceover/billionaires/ scene-by-scene MP3 narration
+public/audio/               original music and SFX for the billionaire video
 ```
 
 ## Skills
@@ -248,7 +356,7 @@ npx skills update
 - All animation is driven by `useCurrentFrame()` / `spring()` / `interpolate()` —
   no CSS animations or transitions, per Remotion rendering rules.
 - `MufaqarIntro`, `ShowcaseIntro` and `MufaqarVertical` are silent. The data
-  stories carry a voiceover; for music, drop a file in `public/` and add
-  `<Audio src={staticFile("track.mp3")} />` to the composition.
+  stories carry a voiceover; `RichestPeople` also has an original, royalty-free
+  music bed and SFX synthesised by `scripts/audio_billionaires.py`.
 - `TOTAL_FRAMES` in `src/timeline.ts` is 360 (12s at 30fps). If you change scene
   offsets, update the composition `durationInFrames` in `src/Root.tsx` to match.
