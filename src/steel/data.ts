@@ -47,6 +47,3 @@ export const formatMt = (value: number) =>
     minimumFractionDigits: 1,
     maximumFractionDigits: 1,
   }).format(value);
-
-export const formatSigned = (value: number) =>
-  `${value > 0 ? "+" : "−"}${Math.abs(value).toFixed(1)}%`;
