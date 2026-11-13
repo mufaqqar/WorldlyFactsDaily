@@ -25,10 +25,49 @@ import {
   RichestPeople,
   WIDTH as BILLIONAIRE_WIDTH,
 } from "./billionaires/MainVideo";
+import {
+  calculateMetadata as calculateCitiesMetadata,
+  FALLBACK_FRAMES as CITY_FRAMES,
+  FPS as CITY_FPS,
+  HEIGHT as CITY_HEIGHT,
+  MostExpensiveCities,
+  WIDTH as CITY_WIDTH,
+} from "./cities/MainVideo";
+import {
+  calculateMetadata as calculatePopulationMetadata,
+  FALLBACK_FRAMES as POPULATION_FRAMES,
+  FPS as POPULATION_FPS,
+  HEIGHT as POPULATION_HEIGHT,
+  MostPopulousCountries,
+  WIDTH as POPULATION_WIDTH,
+} from "./population/MainVideo";
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="MostPopulousCountries"
+        component={MostPopulousCountries}
+        durationInFrames={POPULATION_FRAMES.reduce(
+          (sum, frames) => sum + frames,
+          0,
+        )}
+        fps={POPULATION_FPS}
+        width={POPULATION_WIDTH}
+        height={POPULATION_HEIGHT}
+        defaultProps={{ sceneFrames: POPULATION_FRAMES }}
+        calculateMetadata={calculatePopulationMetadata}
+      />
+      <Composition
+        id="MostExpensiveCities"
+        component={MostExpensiveCities}
+        durationInFrames={CITY_FRAMES.reduce((sum, frames) => sum + frames, 0)}
+        fps={CITY_FPS}
+        width={CITY_WIDTH}
+        height={CITY_HEIGHT}
+        defaultProps={{ sceneFrames: CITY_FRAMES }}
+        calculateMetadata={calculateCitiesMetadata}
+      />
       <Composition
         id="RichestPeople"
         component={RichestPeople}

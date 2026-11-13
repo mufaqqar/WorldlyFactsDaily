@@ -1,0 +1,72 @@
+{
+  "10-honolulu": {
+    "title": "Honolulu",
+    "file": "cities/10-honolulu.jpg",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/2022_Views_from_Diamond_Head_02.jpg/1280px-2022_Views_from_Diamond_Head_02.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page": "https://en.wikipedia.org/wiki/Honolulu",
+    "bytes": 304813
+  },
+  "09-bern": {
+    "title": "Bern",
+    "file": "cities/09-bern.jpg",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Bundeshaus_Bern_2009%2C_Flooffy.jpg/1280px-Bundeshaus_Bern_2009%2C_Flooffy.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page": "https://en.wikipedia.org/wiki/Bern",
+    "bytes": 200913
+  },
+  "08-lausanne": {
+    "title": "Lausanne",
+    "file": "cities/08-lausanne.jpg",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Lausanne_Wiki.jpg/1280px-Lausanne_Wiki.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page": "https://en.wikipedia.org/wiki/Lausanne",
+    "bytes": 718169
+  },
+  "07-st-gallen": {
+    "title": "St. Gallen",
+    "file": "cities/07-st-gallen.jpg",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d1/St.Gallen_vonDreiweieren_09.jpg/1280px-St.Gallen_vonDreiweieren_09.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page": "https://en.wikipedia.org/wiki/St._Gallen",
+    "bytes": 394542
+  },
+  "06-lugano": {
+    "title": "Lugano",
+    "file": "cities/06-lugano.jpg",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Lago_di_Lugano_at_Sunset_%28cropped_2%29.jpg/1280px-Lago_di_Lugano_at_Sunset_%28cropped_2%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page": "https://en.wikipedia.org/wiki/Lugano",
+    "bytes": 350219
+  },
+  "05-geneva": {
+    "title": "Geneva",
+    "file": "cities/05-geneva.jpg",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Geneve_2005_001_Ork.ch.jpg/1280px-Geneve_2005_001_Ork.ch.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page": "https://en.wikipedia.org/wiki/Geneva",
+    "bytes": 478466
+  },
+  "04-basel": {
+    "title": "Basel",
+    "file": "cities/04-basel.jpg",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/Basel_-_M%C3%BCnsterpfalz1.jpg/1280px-Basel_-_M%C3%BCnsterpfalz1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page": "https://en.wikipedia.org/wiki/Basel",
+    "bytes": 245406
+  },
+  "03-lucerne": {
+    "title": "File:Luzern_am_Vierwaldstättersee_Luftaufnahme_2012_10.jpg",
+    "file": "cities/03-lucerne.jpg",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Luzern_am_Vierwaldst%C3%A4ttersee_Luftaufnahme_2012_10.jpg/1280px-Luzern_am_Vierwaldst%C3%A4ttersee_Luftaufnahme_2012_10.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "page": "https://en.wikipedia.org/wiki/Lucerne",
+    "bytes": 241087
+  },
+  "02-george-town": {
+    "title": "File:Camana_Bay_skyline.jpg",
+    "file": "cities/02-george-town.jpg",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/Camana_Bay_skyline.jpg/1280px-Camana_Bay_skyline.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "page": "https://en.wikipedia.org/wiki/George_Town%2C_Cayman_Islands",
+    "bytes": 348771
+  },
+  "01-zurich": {
+    "title": "Zurich",
+    "file": "cities/01-zurich.jpg",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Altstadt_Z%C3%BCrich_2015.jpg/1280px-Altstadt_Z%C3%BCrich_2015.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page": "https://en.wikipedia.org/wiki/Zurich",
+    "bytes": 303013
+  }
+}

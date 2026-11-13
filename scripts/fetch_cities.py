@@ -7,6 +7,8 @@ public/cities/sources.json with the resolved Wikimedia file page.
 
 import json
 import pathlib
+import re
+import time
 import urllib.parse
 import urllib.request
 
@@ -31,49 +33,54 @@ CITIES = [
 FLAG_CODES = ["ch", "ky", "us"]
 
 
-def get(url: str) -> bytes:
-    request = urllib.request.Request(url, headers={"User-Agent": UA})
-    with urllib.request.urlopen(request, timeout=60) as response:
-        return response.read()
+def get(url: str, attempts: int = 4) -> bytes:
+    for attempt in range(attempts):
+        try:
+            request = urllib.request.Request(url, headers={"User-Agent": UA})
+            with urllib.request.urlopen(request, timeout=60) as response:
+                return response.read()
+        except Exception as error:  # noqa: BLE001
+            if attempt == attempts - 1:
+                raise
+            wait = 2 ** (attempt + 1)
+            print(f"  retry in {wait}s ({error})")
+            time.sleep(wait)
+    raise RuntimeError("unreachable")
 
 
 def summary(title: str) -> dict:
-    query = urllib.parse.urlencode(
-        {
-            "action": "query",
-            "titles": title,
-            "prop": "pageimages|info",
-            "piprop": "thumbnail|name|original",
-            "pithumbsize": "1280",
-            "inprop": "url",
-            "format": "json",
-            "formatversion": "2",
-        }
+    url = (
+        "https://en.wikipedia.org/api/rest_v1/page/summary/"
+        + urllib.parse.quote(title.replace(" ", "_"), safe="")
     )
-    data = json.loads(get("https://en.wikipedia.org/w/api.php?" + query))
-    page = data["query"]["pages"][0]
-    thumb = page.get("thumbnail") or {}
-    return {
-        "title": page.get("title"),
-        "thumbnail": thumb,
-        "originalimage": page.get("original") or {},
-        "pageimage": page.get("pageimage"),
-        "content_urls": {"desktop": {"page": page.get("fullurl")}},
-    }
+    return json.loads(get(url))
 
 
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     FLAGS.mkdir(parents=True, exist_ok=True)
-    sources = {}
+    sources_path = OUT / "sources.json"
+    sources = (
+        json.loads(sources_path.read_text(encoding="utf-8"))
+        if sources_path.exists()
+        else {}
+    )
 
     for slug, title in CITIES:
+        existing = list(OUT.glob(f"{slug}.*"))
+        existing = [p for p in existing if p.suffix in {".jpg", ".png"}]
+        if slug in sources and existing and existing[0].stat().st_size > 100_000:
+            print(f"{slug}: cached {existing[0].name}")
+            continue
+
         data = summary(title)
         original = data.get("originalimage") or {}
         thumb = data.get("thumbnail") or {}
         src = thumb.get("source") or original.get("source")
         if not src:
-            raise SystemExit(f"no image for {title}")
+            raise SystemExit(f"no image for {title}: {json.dumps(data)[:400]}")
+        # Upgrade the standard thumbnail to a 1280px render (a listed size).
+        src = re.sub(r"/\d+px-", "/1280px-", src)
         ext = ".png" if src.lower().endswith(".png") else ".jpg"
         target = OUT / f"{slug}{ext}"
         blob = get(src)
@@ -86,13 +93,17 @@ def main() -> None:
             "bytes": len(blob),
         }
         print(f"{slug}: {target.name} {len(blob) / 1024:.0f} KB <- {data.get('title')}")
+        time.sleep(1.2)
 
     for code in FLAG_CODES:
         target = FLAGS / f"{code}.png"
+        if target.exists() and target.stat().st_size > 1000:
+            print(f"flag {code}: cached")
+            continue
         target.write_bytes(get(f"https://flagcdn.com/w320/{code}.png"))
         print(f"flag {code}: {target.stat().st_size / 1024:.0f} KB")
 
-    (OUT / "sources.json").write_text(
+    sources_path.write_text(
         json.dumps(sources, indent=2, ensure_ascii=False), encoding="utf-8"
     )
 

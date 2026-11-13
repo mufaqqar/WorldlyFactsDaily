@@ -11,12 +11,16 @@
     "build:countries": "remotion render RichestCountries out/richest-countries-1960-2024.mp4",
     "build:steel": "remotion render SteelProducers out/steel-producers.mp4",
     "build:billionaires": "remotion render RichestPeople out/richest-people.mp4",
+    "build:cities": "remotion render MostExpensiveCities out/most-expensive-cities.mp4",
+    "build:population": "remotion render MostPopulousCountries out/most-populous-countries.mp4",
     "still": "remotion still MufaqarIntro out/mufaqar-poster.png --frame=60",
     "still:showcase": "remotion still ShowcaseIntro out/poster.png --frame=60",
     "still:vertical": "remotion still MufaqarVertical out/mufaqar-vertical-poster.png --frame=140",
     "still:countries": "remotion still RichestCountries out/richest-countries-poster.png --frame=1330",
     "still:steel": "remotion still SteelProducers out/steel-producers-poster.png --frame=950",
     "still:billionaires": "remotion still RichestPeople out/richest-people-thumbnail.png --frame=1630",
+    "still:cities": "remotion still MostExpensiveCities out/most-expensive-cities-thumbnail.png --frame=1700",
+    "still:population": "remotion still MostPopulousCountries out/most-populous-countries-thumbnail.png --frame=2138",
     "upgrade": "remotion upgrade"
   },
   "dependencies": {
