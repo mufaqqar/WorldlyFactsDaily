@@ -1,7 +1,7 @@
 # Remotion videos
 
-Seven motion graphics built with [Remotion](https://remotion.dev): two landscape
-1920×1080 intros and five vertical 1080×1920 videos, four of them data stories
+Eight motion graphics built with [Remotion](https://remotion.dev): two landscape
+1920×1080 intros and six vertical 1080×1920 videos, five of them data stories
 with voiceover.
 
 | Composition | Output | What it is |
@@ -320,8 +320,8 @@ The score is original numpy synthesis — no samples, no licensing obligations.
 
 ## MostPopulousCountries (9:16, with voiceover + original score)
 
-**Output:** `out/most-populous-countries.mp4` — 1080×1920, 78.4s, 30fps, H.264 +
-AAC voiceover and music.
+**Output:** `out/most-populous-countries.mp4` — 1080×1920, 77.6s (2,329 frames),
+30fps, H.264 + AAC voiceover and music.
 Thumbnail: `out/most-populous-countries-thumbnail.png` (frame 2138).
 
 The top 10 from Worldometer's 2026 country table, which is based on the latest
@@ -358,7 +358,7 @@ humanity** (17.8% + 17.0%), and recaps both populations.
 
 Scene lengths are **computed from the audio** in `calculateMetadata`
 (`getAudioDuration`) plus 0.2s of breathing room per scene. The final narration
-is 75.9s and the composition is 2,352 frames / 78.4s.
+is 75.8s and the composition is 2,329 frames / 77.6s.
 `FALLBACK_FRAMES` in `src/population/MainVideo.tsx` mirrors the audio durations
 so the studio preview and stills stay correctly timed.
 
