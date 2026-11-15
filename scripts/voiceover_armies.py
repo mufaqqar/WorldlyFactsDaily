@@ -30,69 +30,58 @@ VOICE_SETTINGS = {
 EDGE_VOICE = "en-US-GuyNeural"
 EDGE_RATE = "+8%"
 
-# Order matters: intro, countdown 10 → 1, outro.
+# Order matters: intro, countdown 10 → 1, outro. The copy is deliberately
+# terse so the finished video stays under one minute with 0.2 s of air per scene.
 SCENES = [
     (
         "01-intro",
-        "Ten armies. Nineteen point eight million personnel. These are the most "
-        "dangerous fighting forces on Earth, ranked for twenty twenty-six.",
+        "Ten armies. The most dangerous fighting forces on Earth, twenty "
+        "twenty-six.",
     ),
     (
         "10-italy",
-        "Number ten, Italy. Two aircraft carriers, two hundred eighty-five "
-        "warships, and the largest navy in the Mediterranean.",
+        "Number ten, Italy. Two carriers, and the Mediterranean's largest navy.",
     ),
     (
         "09-turkiye",
-        "Number nine, Turkey. Four hundred eighty-one thousand active troops, "
-        "more than two thousand tanks, and one of the world's fastest-growing "
-        "drone industries.",
+        "Number nine, Turkey. Half a million troops, over two thousand tanks.",
     ),
     (
         "08-united-kingdom",
-        "Number eight, the United Kingdom. A blue-water navy, two aircraft "
-        "carriers, and a nuclear deterrent on continuous patrol.",
+        "Number eight, the UK. Two carriers and a nuclear deterrent at sea.",
     ),
     (
         "07-japan",
-        "Number seven, Japan. One hundred fifty-eight warships, twenty-three "
-        "submarines, and the most modern fleet in Asia.",
+        "Number seven, Japan. Asia's most modern fleet, twenty-three submarines.",
     ),
     (
         "06-france",
-        "Number six, France. The only nuclear-powered aircraft carrier outside "
-        "the United States Navy.",
+        "Number six, France. Europe's only nuclear-powered aircraft carrier.",
     ),
     (
         "05-south-korea",
-        "Number five, South Korea. Four hundred fifty thousand active troops, "
-        "backed by three point one million reservists.",
+        "Number five, South Korea. Three million reservists on standby.",
     ),
     (
         "04-india",
-        "Number four, India. One point four million active troops, two aircraft "
-        "carriers, and nearly five million personnel in uniform.",
+        "Number four, India. One point four million troops, and two carriers.",
     ),
     (
         "03-china",
-        "Number three, China. Two million active troops, eight hundred "
-        "forty-one warships, and the largest navy on Earth by hull count.",
+        "Number three, China. The largest navy on Earth, by hull count.",
     ),
     (
         "02-russia",
-        "Number two, Russia. Five thousand six hundred thirty tanks, sixty-six "
-        "submarines, and two million reservists.",
+        "Number two, Russia. The largest tank fleet on Earth.",
     ),
     (
         "01-united-states",
-        "And number one, the United States. Thirteen thousand aircraft, eleven "
-        "aircraft carriers, and a defence budget bigger than the next four "
-        "combined.",
+        "And number one, the United States. Eleven carriers, and a budget "
+        "bigger than the next four combined.",
     ),
     (
         "12-outro",
-        "Ten armies. Nineteen point eight million personnel. Follow for more "
-        "military rankings.",
+        "Ten armies. Follow for more military rankings.",
     ),
 ]
 

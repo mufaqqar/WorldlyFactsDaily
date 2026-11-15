@@ -36,7 +36,7 @@ const AUDIO_FILES = [INTRO_AUDIO, ...ARMIES.map((army) => army.audio), OUTRO_AUD
 // Mirrors the measured narration durations at 30 fps with 0.2 s of breathing
 // room; only used for the Studio default before calculateMetadata runs.
 export const FALLBACK_FRAMES = [
-  220, 213, 288, 238, 222, 177, 231, 264, 246, 220, 267, 140,
+  120, 173, 148, 118, 154, 152, 143, 129, 111, 108, 193, 104,
 ];
 
 export const calculateMetadata: CalculateMetadataFunction<ArmyProps> =

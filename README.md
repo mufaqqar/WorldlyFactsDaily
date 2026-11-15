@@ -6,7 +6,7 @@ with voiceover.
 
 | Composition | Output | What it is |
 |---|---|---|
-| `MostDangerousArmies` | `out/most-dangerous-armies.mp4` | 91s vertical (9:16) data story with voiceover + original score — the world's 10 most powerful armies, Global Firepower 2026 |
+| `MostDangerousArmies` | `out/most-dangerous-armies.mp4` | 55s vertical (9:16) data story with voiceover + original score — the world's 10 most powerful armies, Global Firepower 2026 |
 | `MostPopulousCountries` | `out/most-populous-countries.mp4` | 78s vertical (9:16) data story with voiceover + original score — the world's 10 most populous countries, UN 2026 estimates |
 | `MostExpensiveCities` | `out/most-expensive-cities.mp4` | 60s vertical (9:16) data story with voiceover + original score — the world's 10 most expensive cities, Numbeo 2026 Mid-Year |
 | `RichestPeople` | `out/richest-people.mp4` | 58s vertical (9:16) data story with voiceover + original score — the world's 10 richest people, Forbes 2026 |
@@ -410,7 +410,7 @@ The score is original numpy synthesis — no samples, no licensing obligations.
 
 ## MostDangerousArmies (9:16, with voiceover + original score)
 
-**Output:** `out/most-dangerous-armies.mp4` — 1080×1920, 90.9s (2,726 frames),
+**Output:** `out/most-dangerous-armies.mp4` — 1080×1920, 54.7s (1,641 frames),
 30fps, H.264 + AAC voiceover and music.
 Thumbnail: `out/most-dangerous-armies-thumbnail.png` (frame 60).
 
@@ -440,16 +440,14 @@ region and a GFP 2026 chip.
 
 | # | Scene | Narration |
 |---|-------|-----------|
-| 01 | Title — TOP 10 · Most Dangerous Armies · 2026 | "Ten armies. Nineteen point eight million personnel…" |
+| 01 | Title — TOP 10 · Most Dangerous Armies · 2026 | "Ten armies. The most dangerous fighting forces on Earth, twenty twenty-six." |
 | 02–11 | Ranks 10 → 1 | Italy, Türkiye, UK, Japan, France, South Korea, India, China, Russia, United States |
-| 12 | Outro — the follow CTA + top-3 recap | "Ten armies. Nineteen point eight million personnel. Follow for more military rankings." |
-
-The "19.8 million personnel" line counts **total** personnel for the ten
-countries — active, reserve and paramilitary — not active alone (7.87 million).
+| 12 | Outro — the follow CTA + top-3 recap | "Ten armies. Follow for more military rankings." |
 
 Scene lengths are **computed from the audio** in `calculateMetadata`
 (`getAudioDuration`) plus 0.2s of breathing room per scene. The final narration
-is 88.5s and the composition is 2,726 frames / 90.9s.
+is 52.5s and the composition is 1,641 frames / 54.7s — deliberately under one
+minute.
 `FALLBACK_FRAMES` in `src/armies/MainVideo.tsx` mirrors the audio durations so
 the studio preview and stills stay correctly timed.
 
@@ -661,6 +659,7 @@ scripts/
   replace_city_images.py    swap specific city images via Wikipedia media list
   check_audio_alignment.py  QA: narration clips vs. rendered mix (envelope NCC)
   qc_cities_frames.py       QA: OCR every settled scene from the MP4
+  qc_armies_frames.py       QA: OCR every army scene (PwrIndx, troops, country)
 public/voiceover/countries/ scene-by-scene MP3 narration
 public/voiceover/steel/     scene-by-scene MP3 narration
 public/voiceover/billionaires/ scene-by-scene MP3 narration

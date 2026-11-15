@@ -16,18 +16,18 @@ from rapidocr_onnxruntime import RapidOCR
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 FRAMES = {
-    "intro": 170,
-    "Italy": 390,
-    "Turkiye": 663,
-    "UnitedKingdom": 911,
-    "Japan": 1137,
-    "France": 1323,
-    "SouthKorea": 1543,
-    "India": 1800,
-    "China": 2050,
-    "Russia": 2275,
-    "UnitedStates": 2533,
-    "outro": 2696,
+    "intro": 75,
+    "Italy": 199,
+    "Turkiye": 381,
+    "UnitedKingdom": 508,
+    "Japan": 640,
+    "France": 793,
+    "SouthKorea": 939,
+    "India": 1076,
+    "China": 1194,
+    "Russia": 1301,
+    "UnitedStates": 1486,
+    "outro": 1598,
 }
 
 # name -> (power index, active personnel as digits only)
@@ -45,21 +45,25 @@ EXPECT = {
 }
 
 COUNTRY = {
-    "Italy": "Italy",
-    "Turkiye": "Türkiye",
-    "UnitedKingdom": "UnitedKingdom",
-    "Japan": "Japan",
-    "France": "France",
-    "SouthKorea": "SouthKorea",
-    "India": "India",
-    "China": "China",
-    "Russia": "Russia",
-    "UnitedStates": "UnitedStates",
+    "Italy": ["Italy"],
+    "Turkiye": ["rkiye"],  # OCR mangles the ü
+    "UnitedKingdom": ["UnitedKingdom"],
+    "Japan": ["Japan"],
+    "France": ["France"],
+    "SouthKorea": ["SouthKorea"],
+    "India": ["India"],
+    "China": ["China"],
+    "Russia": ["Russia"],
+    "UnitedStates": ["UnitedStates"],
 }
 
 
 def flatten(value: str) -> str:
     return re.sub(r"[\s,]", "", value)
+
+
+def digits(value: str) -> str:
+    return re.sub(r"\D", "", value)
 
 
 def main() -> None:
@@ -89,16 +93,17 @@ def main() -> None:
             continue
 
         index, active = EXPECT[name]
-        country = COUNTRY[name]
+        aliases = COUNTRY[name]
         index_ok = index in blob
-        active_ok = active in flatten(blob)
-        country_ok = flatten(country) in blob
+        # OCR sometimes reads the thousands comma as a period, so compare digits.
+        active_ok = active in digits(blob)
+        country_ok = any(flatten(alias) in blob for alias in aliases)
         misses += 0 if (index_ok and active_ok and country_ok) else 1
         print(
             f"{name:14s} frame {frame:4d}  "
             f"pwr {index:6s} {'OK  ' if index_ok else 'MISS'}  "
             f"active {active:8s} {'OK  ' if active_ok else 'MISS'}  "
-            f"country {country:14s} {'OK' if country_ok else 'MISS'}"
+            f"country {'/'.join(aliases):14s} {'OK' if country_ok else 'MISS'}"
         )
 
     cap.release()
