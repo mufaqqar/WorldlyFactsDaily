@@ -13,6 +13,7 @@
     "build:billionaires": "remotion render RichestPeople out/richest-people.mp4",
     "build:cities": "remotion render MostExpensiveCities out/most-expensive-cities.mp4",
     "build:population": "remotion render MostPopulousCountries out/most-populous-countries.mp4",
+    "build:armies": "remotion render MostDangerousArmies out/most-dangerous-armies.mp4",
     "still": "remotion still MufaqarIntro out/mufaqar-poster.png --frame=60",
     "still:showcase": "remotion still ShowcaseIntro out/poster.png --frame=60",
     "still:vertical": "remotion still MufaqarVertical out/mufaqar-vertical-poster.png --frame=140",
@@ -21,6 +22,7 @@
     "still:billionaires": "remotion still RichestPeople out/richest-people-thumbnail.png --frame=1630",
     "still:cities": "remotion still MostExpensiveCities out/most-expensive-cities-thumbnail.png --frame=1700",
     "still:population": "remotion still MostPopulousCountries out/most-populous-countries-thumbnail.png --frame=2138",
+    "still:armies": "remotion still MostDangerousArmies out/most-dangerous-armies-thumbnail.png --frame=60",
     "upgrade": "remotion upgrade"
   },
   "dependencies": {

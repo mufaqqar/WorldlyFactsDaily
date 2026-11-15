@@ -5,7 +5,10 @@ plus 0.2 s of breathing room, rounded up to whole frames at 30 fps. The mix is
 the rendered MP4's audio track. Correlation runs on amplitude envelopes at
 500 Hz, which is robust to the music bed underneath the voice.
 
-Run:  python scripts/check_audio_alignment.py [out/most-expensive-cities.mp4]
+Run:  python scripts/check_audio_alignment.py [out/most-expensive-cities.mp4] [cities]
+
+The second argument picks the narration folder (`cities`, `armies`, ...); scene
+order is listed in `SCENE_ORDER` because the clip numbers run 10 → 1.
 """
 
 import pathlib
@@ -20,11 +23,18 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 FPS = 30
 ENV_SR = 500
 TMP = ROOT / "out" / "qa-audio"
-FILES = [
-    "01-intro", "10-honolulu", "09-bern", "08-lausanne", "07-st-gallen",
-    "06-lugano", "05-geneva", "04-basel", "03-lucerne", "02-george-town",
-    "01-zurich", "12-outro",
-]
+SCENE_ORDER = {
+    "cities": [
+        "01-intro", "10-honolulu", "09-bern", "08-lausanne", "07-st-gallen",
+        "06-lugano", "05-geneva", "04-basel", "03-lucerne", "02-george-town",
+        "01-zurich", "12-outro",
+    ],
+    "armies": [
+        "01-intro", "10-italy", "09-turkiye", "08-united-kingdom", "07-japan",
+        "06-france", "05-south-korea", "04-india", "03-china", "02-russia",
+        "01-united-states", "12-outro",
+    ],
+}
 
 
 def ffmpeg() -> str:
@@ -60,6 +70,10 @@ def main() -> None:
     video = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else (
         ROOT / "out" / "most-expensive-cities.mp4"
     )
+    folder = sys.argv[2] if len(sys.argv) > 2 else "cities"
+    if folder not in SCENE_ORDER:
+        raise SystemExit(f"unknown narration folder: {folder}")
+    files = SCENE_ORDER[folder]
     if not video.exists():
         raise SystemExit(f"missing render: {video}")
 
@@ -73,9 +87,9 @@ def main() -> None:
         frame = 0
         prev_end = -1.0
         failures = 0
-        for name in FILES:
+        for name in files:
             clip_wav = TMP / f"{name}.wav"
-            to_wav(ROOT / "public" / "voiceover" / "cities" / f"{name}.mp3", clip_wav)
+            to_wav(ROOT / "public" / "voiceover" / folder / f"{name}.mp3", clip_wav)
             clip, sr = read_wav(clip_wav)
             clip_s = len(clip) / sr
             clip_env = envelope(clip, sr // ENV_SR)

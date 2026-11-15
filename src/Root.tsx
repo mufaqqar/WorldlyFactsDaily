@@ -41,10 +41,31 @@ import {
   MostPopulousCountries,
   WIDTH as POPULATION_WIDTH,
 } from "./population/MainVideo";
+import {
+  calculateMetadata as calculateArmiesMetadata,
+  FALLBACK_FRAMES as ARMY_FRAMES,
+  FPS as ARMY_FPS,
+  HEIGHT as ARMY_HEIGHT,
+  MostDangerousArmies,
+  WIDTH as ARMY_WIDTH,
+} from "./armies/MainVideo";
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="MostDangerousArmies"
+        component={MostDangerousArmies}
+        durationInFrames={ARMY_FRAMES.reduce(
+          (sum, frames) => sum + frames,
+          0,
+        )}
+        fps={ARMY_FPS}
+        width={ARMY_WIDTH}
+        height={ARMY_HEIGHT}
+        defaultProps={{ sceneFrames: ARMY_FRAMES }}
+        calculateMetadata={calculateArmiesMetadata}
+      />
       <Composition
         id="MostPopulousCountries"
         component={MostPopulousCountries}

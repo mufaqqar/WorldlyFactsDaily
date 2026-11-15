@@ -1,11 +1,12 @@
 # Remotion videos
 
-Eight motion graphics built with [Remotion](https://remotion.dev): two landscape
-1920×1080 intros and six vertical 1080×1920 videos, five of them data stories
+Nine motion graphics built with [Remotion](https://remotion.dev): two landscape
+1920×1080 intros and seven vertical 1080×1920 videos, six of them data stories
 with voiceover.
 
 | Composition | Output | What it is |
 |---|---|---|
+| `MostDangerousArmies` | `out/most-dangerous-armies.mp4` | 91s vertical (9:16) data story with voiceover + original score — the world's 10 most powerful armies, Global Firepower 2026 |
 | `MostPopulousCountries` | `out/most-populous-countries.mp4` | 78s vertical (9:16) data story with voiceover + original score — the world's 10 most populous countries, UN 2026 estimates |
 | `MostExpensiveCities` | `out/most-expensive-cities.mp4` | 60s vertical (9:16) data story with voiceover + original score — the world's 10 most expensive cities, Numbeo 2026 Mid-Year |
 | `RichestPeople` | `out/richest-people.mp4` | 58s vertical (9:16) data story with voiceover + original score — the world's 10 richest people, Forbes 2026 |
@@ -407,6 +408,87 @@ The score is original numpy synthesis — no samples, no licensing obligations.
 - Population figures: Worldometer's 2026 table, based on United Nations
   Population Division estimates.
 
+## MostDangerousArmies (9:16, with voiceover + original score)
+
+**Output:** `out/most-dangerous-armies.mp4` — 1080×1920, 90.9s (2,726 frames),
+30fps, H.264 + AAC voiceover and music.
+Thumbnail: `out/most-dangerous-armies-thumbnail.png` (frame 60).
+
+The top 10 from **Global Firepower's Military Strength Ranking 2026**, which
+scores 145 nations across 60+ factors. The **Power Index (PwrIndx)** runs upward
+from a theoretically perfect `0.0000`, so a **lower score means a stronger
+military** — the list below is therefore ordered by ascending PwrIndx.
+
+| Rank | Country | PwrIndx | Active | Reserve | Total | Aircraft | Tanks | Defence budget |
+|---|---|---|---|---|---|---|---|---|
+| 1 | United States | 0.0741 | 1,333,030 | 799,500 | 2,132,530 | 13,032 | 4,666 | $831.5B |
+| 2 | Russia | 0.0791 | 1,320,000 | 2,000,000 | 3,570,000 | 4,237 | 5,630 | $212.6B |
+| 3 | China | 0.0919 | 2,035,000 | 510,000 | 3,170,000 | 3,529 | 5,870 | $303.0B |
+| 4 | India | 0.1346 | 1,431,000 | 1,000,000 | 4,958,000 | 2,183 | 3,913 | $109.0B |
+| 5 | South Korea | 0.1642 | 450,000 | 3,100,000 | 3,670,000 | 1,540 | 1,831 | $44.8B |
+| 6 | France | 0.1798 | 264,000 | 43,444 | 457,444 | 974 | 427 | $67.2B |
+| 7 | Japan | 0.1876 | 251,500 | 56,000 | 332,500 | 1,429 | 734 | $58.0B |
+| 8 | United Kingdom | 0.1881 | 141,330 | 31,940 | 173,270 | 625 | 288 | $88.5B |
+| 9 | Türkiye | 0.1975 | 481,000 | 380,000 | 1,011,000 | 1,101 | 2,284 | $51.4B |
+| 10 | Italy | 0.2211 | 165,500 | 18,300 | 288,800 | 714 | 203 | $37.3B |
+
+The big animated number on every profile is **active personnel**, and the strength
+rail compares it with the largest active force in the top 10 — China's 2,035,000 —
+so the size gap is visible at a glance. The four stat boxes cover Power Index,
+defence budget, warplanes and tanks; the card carries the flag plate, country code,
+region and a GFP 2026 chip.
+
+| # | Scene | Narration |
+|---|-------|-----------|
+| 01 | Title — TOP 10 · Most Dangerous Armies · 2026 | "Ten armies. Nineteen point eight million personnel…" |
+| 02–11 | Ranks 10 → 1 | Italy, Türkiye, UK, Japan, France, South Korea, India, China, Russia, United States |
+| 12 | Outro — the follow CTA + top-3 recap | "Ten armies. Nineteen point eight million personnel. Follow for more military rankings." |
+
+The "19.8 million personnel" line counts **total** personnel for the ten
+countries — active, reserve and paramilitary — not active alone (7.87 million).
+
+Scene lengths are **computed from the audio** in `calculateMetadata`
+(`getAudioDuration`) plus 0.2s of breathing room per scene. The final narration
+is 88.5s and the composition is 2,726 frames / 90.9s.
+`FALLBACK_FRAMES` in `src/armies/MainVideo.tsx` mirrors the audio durations so
+the studio preview and stills stay correctly timed.
+
+### Regenerating the voiceover
+
+```bash
+python scripts/voiceover_armies.py
+```
+
+- Primary engine: ElevenLabs **Adam** (`pNInz6obpgDQGcFmaJgB`), model
+  `eleven_multilingual_v2`, speed 1.18, stability 0.42, similarity 0.82,
+  style 0.28, speaker boost on.
+- The script reads any key containing `ELEVEN` from `.env`; if ElevenLabs is
+  unavailable it falls back to edge-tts `en-US-GuyNeural` at `+8%`.
+- Narration text: the `SCENES` list in `scripts/voiceover_armies.py`.
+- Audio lands in `public/voiceover/armies/*.mp3`.
+
+### Music and SFX
+
+The score is `public/audio/music-armies.wav`, a copy of the population cue, looped
+under the narration at 0.32 volume. SFX are shared across the data stories:
+whoosh 0.28, tick 0.16, impacts 0.42–0.50, shimmer 0.24.
+
+### Editing the data and visuals
+
+- **Armies, PwrIndx, personnel, equipment, budgets, flags, audio** — `src/armies/data.ts`
+- **Narration** — `scripts/voiceover_armies.py`
+- **Composition, scenes, audio mix** — `src/armies/MainVideo.tsx`
+- **Palette** — `src/armies/theme.ts` (shared navy / gold system plus a steel accent)
+- **Reusable components** — `TroopCounter`, `StrengthBar`, `RankWatermark`,
+  `ArmyCard`, `ArmyProfile`, `ArmyBackground`, `ArmyHud`, `ArmyIntro`, `ArmyOutro`
+
+### Asset credits
+
+- Flags: [flagcdn.com](https://flagcdn.com) PNGs.
+- Music and SFX: original synthesis by `scripts/audio_population.py`.
+- Strength figures: Global Firepower's 2026 Military Strength Ranking,
+  <https://www.globalfirepower.com/countries-listing.php>.
+
 ## MufaqarIntro
 
 **Output:** `out/mufaqar-intro.mp4` — H.264, ~3.9 MB, 12s, silent.
@@ -445,6 +527,7 @@ npm run build:steel      # render out/steel-producers.mp4 (9:16 + voice)
 npm run build:billionaires # render out/richest-people.mp4 (9:16 + voice + score)
 npm run build:cities     # render out/most-expensive-cities.mp4 (9:16 + voice + score)
 npm run build:population # render out/most-populous-countries.mp4 (9:16 + voice + score)
+npm run build:armies     # render out/most-dangerous-armies.mp4 (9:16 + voice + score)
 
 npm run still            # out/mufaqar-poster.png (frame 60)
 npm run still:showcase   # out/poster.png (frame 60)
@@ -454,6 +537,7 @@ npm run still:steel      # out/steel-producers-poster.png (frame 950)
 npm run still:billionaires # out/richest-people-thumbnail.png (frame 1630)
 npm run still:cities     # out/most-expensive-cities-thumbnail.png (frame 1700)
 npm run still:population # out/most-populous-countries-thumbnail.png (frame 2138)
+npm run still:armies     # out/most-dangerous-armies-thumbnail.png (frame 60)
 ```
 
 Render any single frame:
@@ -550,12 +634,26 @@ src/
     ShareBar.tsx            share of world population + "1 in 10" marker
     RankWatermark.tsx       oversized rank numeral + 10-step rail
     PopulationOutro.tsx     scene 12 — globe, 35% recap + follow CTA
+  armies/                   vertical Global Firepower 2026 military story + score
+    data.ts                 top 10 armies, PwrIndx, personnel, equipment, audio
+    theme.ts                shared navy / gold palette + steel accent
+    MainVideo.tsx           audio-driven scenes, music bed, SFX, global fade
+    ArmyBackground.tsx      wireframe globe, grid, dust and value ticker
+    ArmyHud.tsx             progress bar, 10-step countdown rail, source line
+    ArmyIntro.tsx           scene 01 — 1 → 10 count and title
+    ArmyProfile.tsx         scenes 02–11 — emblem, troops counter, rail, stats
+    ArmyCard.tsx            flag plate card, rank and GFP 2026 chips
+    TroopCounter.tsx        gold active-personnel count-up
+    StrengthBar.tsx         active personnel vs. the largest army (China)
+    RankWatermark.tsx       oversized rank numeral + 10-step rail
+    ArmyOutro.tsx           scene 12 — top-3 recap + follow CTA
 scripts/
   voiceover_countries.py    edge-tts narration generator (countries)
   voiceover_steel.py        edge-tts narration generator (steel)
   voiceover_billionaires.py ElevenLabs/edge-tts narration generator (billionaires)
   voiceover_cities.py       ElevenLabs narration generator (cities)
   voiceover_population.py   ElevenLabs narration generator (population)
+  voiceover_armies.py       ElevenLabs/edge-tts narration generator (armies)
   audio_billionaires.py     original numpy music + SFX synthesis
   audio_cities.py           original numpy score synthesis (cities)
   audio_population.py       original numpy score synthesis (population)
@@ -568,6 +666,7 @@ public/voiceover/steel/     scene-by-scene MP3 narration
 public/voiceover/billionaires/ scene-by-scene MP3 narration
 public/voiceover/cities/    scene-by-scene MP3 narration
 public/voiceover/population/ scene-by-scene MP3 narration
+public/voiceover/armies/    scene-by-scene MP3 narration
 public/cities/              city photos + sources.json
 public/audio/               original music and SFX for the data-story videos
 ```
@@ -588,7 +687,8 @@ npx skills update
 - All animation is driven by `useCurrentFrame()` / `spring()` / `interpolate()` —
   no CSS animations or transitions, per Remotion rendering rules.
 - `MufaqarIntro`, `ShowcaseIntro` and `MufaqarVertical` are silent. The data
-  stories carry a voiceover; `RichestPeople` and `MostExpensiveCities` also have
-  original, royalty-free music beds and SFX synthesised with numpy.
+  stories carry a voiceover; `RichestPeople`, `MostExpensiveCities`,
+  `MostPopulousCountries` and `MostDangerousArmies` also have original,
+  royalty-free music beds and SFX synthesised with numpy.
 - `TOTAL_FRAMES` in `src/timeline.ts` is 360 (12s at 30fps). If you change scene
   offsets, update the composition `durationInFrames` in `src/Root.tsx` to match.
