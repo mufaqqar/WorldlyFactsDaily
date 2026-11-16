@@ -1,0 +1,239 @@
+import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import {
+  COUNTRIES,
+  DATA_DATE,
+  DATA_EDITION,
+  DATA_NOTE,
+  DATA_SOURCE,
+  UNIVERSITIES,
+} from "./data";
+import { displayFamily, palette } from "./theme";
+
+/** Landscape HUD: progress at the top, countdown rail bottom-right. */
+export const UniversityHudWide: React.FC<{ sceneFrames: number[] }> = ({
+  sceneFrames,
+}) => {
+  const frame = useCurrentFrame();
+  const { durationInFrames } = useVideoConfig();
+
+  const progress = interpolate(frame, [0, durationInFrames - 1], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+
+  const offsets = sceneFrames.reduce<number[]>((acc, frames, i) => {
+    acc.push(i === 0 ? 0 : acc[i - 1] + sceneFrames[i - 1]);
+    return acc;
+  }, []);
+
+  let activeScene = 0;
+  for (let i = 0; i < offsets.length; i++) {
+    if (frame >= offsets[i]) activeScene = i;
+  }
+
+  const activeRank =
+    activeScene >= 1 && activeScene <= 10 ? 11 - activeScene : null;
+  const outro = activeScene === 11;
+
+  return (
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        fontFamily: displayFamily,
+        pointerEvents: "none",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 4,
+          backgroundColor: "rgba(255,215,0,0.1)",
+        }}
+      >
+        <div
+          style={{
+            height: "100%",
+            width: `${progress * 100}%`,
+            background:
+              "linear-gradient(90deg, #8A5A12, #FFD700 40%, #FFF8D6 62%, #60A5FA 100%)",
+            boxShadow: "0 0 20px rgba(255,215,0,0.7)",
+          }}
+        />
+      </div>
+
+      <div
+        style={{
+          position: "absolute",
+          top: 28,
+          left: 44,
+          display: "flex",
+          alignItems: "center",
+          gap: 11,
+        }}
+      >
+        <span
+          style={{
+            width: 7,
+            height: 7,
+            borderRadius: 99,
+            backgroundColor: palette.gold,
+            boxShadow: "0 0 14px rgba(255,215,0,0.95)",
+            opacity: 0.6 + Math.sin(frame / 14) * 0.4,
+          }}
+        />
+        <div>
+          <div
+            style={{
+              fontSize: 13,
+              letterSpacing: 4,
+              color: palette.goldSoft,
+              textTransform: "uppercase",
+            }}
+          >
+            QS World University Rankings
+          </div>
+          <div
+            style={{
+              marginTop: 3,
+              fontSize: 9,
+              letterSpacing: 2.4,
+              color: palette.muted,
+              textTransform: "uppercase",
+              opacity: 0.8,
+            }}
+          >
+            {DATA_NOTE} · {DATA_EDITION}
+          </div>
+        </div>
+      </div>
+
+      <div
+        style={{
+          position: "absolute",
+          top: 30,
+          right: 44,
+          textAlign: "right",
+        }}
+      >
+        <div
+          style={{
+            fontSize: 10,
+            letterSpacing: 2.6,
+            color: palette.muted,
+            textTransform: "uppercase",
+          }}
+        >
+          {COUNTRIES} countries · 10 universities
+        </div>
+        <div
+          style={{
+            marginTop: 3,
+            fontSize: 9,
+            letterSpacing: 2.2,
+            color: palette.mutedDeep,
+            textTransform: "uppercase",
+          }}
+        >
+          Ranking · {DATA_DATE}
+        </div>
+      </div>
+
+      {/* countdown rail, bottom-right */}
+      <div
+        style={{
+          position: "absolute",
+          right: 60,
+          bottom: 30,
+          display: "flex",
+          alignItems: "flex-end",
+          gap: 26,
+        }}
+      >
+        <div
+          style={{
+            paddingBottom: 2,
+            fontSize: 9,
+            letterSpacing: 3,
+            color: palette.mutedDeep,
+            textTransform: "uppercase",
+            whiteSpace: "nowrap",
+          }}
+        >
+          Countdown 10 → 01
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-end",
+            gap: 14,
+            height: 34,
+          }}
+        >
+          {UNIVERSITIES.map((university) => {
+            const done =
+              outro || (activeRank !== null && university.rank > activeRank);
+            const active = activeRank === university.rank;
+            return (
+              <div
+                key={university.rank}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: 5,
+                }}
+              >
+                <div
+                  style={{
+                    width: active ? 6 : done ? 3 : 2,
+                    height: active ? 30 : done ? 15 : 9,
+                    borderRadius: 99,
+                    background: active
+                      ? "linear-gradient(180deg, #FFF8D6, #FFD700 55%, #B8860B)"
+                      : done
+                        ? "rgba(96,165,250,0.8)"
+                        : "rgba(148,163,184,0.28)",
+                    boxShadow: active
+                      ? "0 0 18px rgba(255,215,0,0.85)"
+                      : "none",
+                  }}
+                />
+                <span
+                  style={{
+                    fontSize: 9,
+                    letterSpacing: 0.4,
+                    color: active
+                      ? palette.gold
+                      : done
+                        ? "#93C5FD"
+                        : palette.mutedDeep,
+                    opacity: active ? 1 : 0.62,
+                  }}
+                >
+                  {String(university.rank).padStart(2, "0")}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div
+        style={{
+          position: "absolute",
+          left: 44,
+          bottom: 36,
+          fontSize: 9,
+          letterSpacing: 1.6,
+          color: palette.muted,
+          opacity: 0.46,
+        }}
+      >
+        Source: {DATA_SOURCE} · {DATA_EDITION}
+      </div>
+    </div>
+  );
+};

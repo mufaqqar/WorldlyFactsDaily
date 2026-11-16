@@ -14,6 +14,8 @@
     "build:cities": "remotion render MostExpensiveCities out/most-expensive-cities.mp4",
     "build:population": "remotion render MostPopulousCountries out/most-populous-countries.mp4",
     "build:armies": "remotion render MostDangerousArmies out/most-dangerous-armies.mp4",
+    "build:universities": "remotion render TopUniversities out/top-universities-2027.mp4",
+    "build:universities:tablet": "remotion render TopUniversitiesTablet out/top-universities-2027-tablet.mp4",
     "still": "remotion still MufaqarIntro out/mufaqar-poster.png --frame=60",
     "still:showcase": "remotion still ShowcaseIntro out/poster.png --frame=60",
     "still:vertical": "remotion still MufaqarVertical out/mufaqar-vertical-poster.png --frame=140",
@@ -23,6 +25,8 @@
     "still:cities": "remotion still MostExpensiveCities out/most-expensive-cities-thumbnail.png --frame=1700",
     "still:population": "remotion still MostPopulousCountries out/most-populous-countries-thumbnail.png --frame=2138",
     "still:armies": "remotion still MostDangerousArmies out/most-dangerous-armies-thumbnail.png --frame=60",
+    "still:universities": "remotion still TopUniversities out/top-universities-thumbnail.png --frame=120",
+    "still:universities:tablet": "remotion still TopUniversitiesTablet out/top-universities-tablet-thumbnail.png --frame=120",
     "upgrade": "remotion upgrade"
   },
   "dependencies": {

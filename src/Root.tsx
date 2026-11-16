@@ -49,6 +49,16 @@ import {
   MostDangerousArmies,
   WIDTH as ARMY_WIDTH,
 } from "./armies/MainVideo";
+import {
+  calculateMetadata as calculateUniversityMetadata,
+  FALLBACK_FRAMES as UNIVERSITY_FRAMES,
+  FPS as UNIVERSITY_FPS,
+  HEIGHT as UNIVERSITY_HEIGHT,
+  TopUniversities,
+  WIDTH as UNIVERSITY_WIDTH,
+  WIDE_HEIGHT as UNIVERSITY_WIDE_HEIGHT,
+  WIDE_WIDTH as UNIVERSITY_WIDE_WIDTH,
+} from "./universities/MainVideo";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -65,6 +75,32 @@ export const RemotionRoot: React.FC = () => {
         height={ARMY_HEIGHT}
         defaultProps={{ sceneFrames: ARMY_FRAMES }}
         calculateMetadata={calculateArmiesMetadata}
+      />
+      <Composition
+        id="TopUniversities"
+        component={TopUniversities}
+        durationInFrames={UNIVERSITY_FRAMES.reduce(
+          (sum, frames) => sum + frames,
+          0,
+        )}
+        fps={UNIVERSITY_FPS}
+        width={UNIVERSITY_WIDTH}
+        height={UNIVERSITY_HEIGHT}
+        defaultProps={{ sceneFrames: UNIVERSITY_FRAMES, format: "portrait" }}
+        calculateMetadata={calculateUniversityMetadata}
+      />
+      <Composition
+        id="TopUniversitiesTablet"
+        component={TopUniversities}
+        durationInFrames={UNIVERSITY_FRAMES.reduce(
+          (sum, frames) => sum + frames,
+          0,
+        )}
+        fps={UNIVERSITY_FPS}
+        width={UNIVERSITY_WIDE_WIDTH}
+        height={UNIVERSITY_WIDE_HEIGHT}
+        defaultProps={{ sceneFrames: UNIVERSITY_FRAMES, format: "landscape" }}
+        calculateMetadata={calculateUniversityMetadata}
       />
       <Composition
         id="MostPopulousCountries"
