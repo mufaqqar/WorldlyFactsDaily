@@ -196,7 +196,6 @@ export const UniversityProfile: React.FC<{
           top: 90,
           height: 1080,
           background: `radial-gradient(ellipse 55% 46% at 50% 34%, ${university.accent}2b 0%, ${university.accent}0a 42%, transparent 72%)`,
-          filter: "blur(28px)",
           opacity: 0.9,
         }}
       />
@@ -213,7 +212,6 @@ export const UniversityProfile: React.FC<{
             rotate: "17deg",
             background:
               "linear-gradient(90deg, transparent, rgba(255,248,214,0.16), rgba(59,130,246,0.12), transparent)",
-            filter: "blur(26px)",
             mixBlendMode: "screen",
           }}
         />
@@ -265,13 +263,8 @@ export const UniversityProfile: React.FC<{
           justifyContent: "center",
         }}
       >
-        {/* slow push-in keeps long chapters alive without re-triggering motion */}
-        <div
-          style={{
-            scale: 1 + (frame / durationInFrames) * 0.045,
-            transformOrigin: "center top",
-          }}
-        >
+        {/* the card holds still after the entrance so its raster cache stays valid */}
+        <div>
           <UniversityCard
             university={university}
             enter={enter}
@@ -296,7 +289,6 @@ export const UniversityProfile: React.FC<{
               justifyContent: "center",
               opacity: enter,
               translate: `0px ${interpolate(enter, [0, 1], [-24, 0])}px`,
-              filter: "drop-shadow(0 14px 30px rgba(255,215,0,0.35))",
             }}
           >
             <UniversityEmblem size={76} />

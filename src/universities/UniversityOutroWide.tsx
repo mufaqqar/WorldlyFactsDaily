@@ -116,7 +116,6 @@ export const UniversityOutroWide: React.FC<{ durationInFrames: number }> = ({
           height: 1000,
           background:
             "radial-gradient(ellipse 48% 44% at 36% 40%, rgba(255,215,0,0.2) 0%, rgba(255,215,0,0.05) 46%, transparent 74%)",
-          filter: "blur(34px)",
           opacity: glowPulse,
         }}
       />
@@ -142,7 +141,6 @@ export const UniversityOutroWide: React.FC<{ durationInFrames: number }> = ({
             opacity: pinIn,
             scale: interpolate(pinIn, [0, 1], [0.55, 1]),
             rotate: `${interpolate(pinIn, [0, 1], [-8, 0])}deg`,
-            filter: "drop-shadow(0 24px 44px rgba(255,215,0,0.4))",
           }}
         >
           <UniversityEmblem size={124} />
@@ -222,7 +220,7 @@ export const UniversityOutroWide: React.FC<{ durationInFrames: number }> = ({
               color: "transparent",
               opacity: lineTwoIn,
               scale: interpolate(lineTwoIn, [0, 1], [0.86, 1]),
-              filter: "drop-shadow(0 20px 50px rgba(255,215,0,0.28))",
+              textShadow: "0 10px 30px rgba(255,215,0,0.32)",
               whiteSpace: "nowrap",
             }}
           >

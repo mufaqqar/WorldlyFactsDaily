@@ -68,7 +68,7 @@ export const UniversityCard: React.FC<Props> = ({
         borderRadius: 40,
         background:
           "linear-gradient(160deg, rgba(255,230,150,0.85) 0%, rgba(255,215,0,0.25) 22%, rgba(255,255,255,0.06) 48%, rgba(59,130,246,0.38) 100%)",
-        boxShadow: `0 50px 120px rgba(0,0,0,0.65), 0 0 80px ${university.accent}22`,
+        boxShadow: `0 26px 64px rgba(0,0,0,0.6), 0 0 44px ${university.accent}1f`,
         opacity: enter,
         scale: 0.93 + 0.07 * enter,
         translate: `${translateX}px ${translateY}px`,
@@ -85,18 +85,13 @@ export const UniversityCard: React.FC<Props> = ({
           backgroundColor: "#0A1020",
         }}
       >
-        {/* blurred flag backdrop */}
-        <Img
-          src={flagSrc}
+        {/* tinted backdrop (soft blur emulated with layered gradients so the
+            compositor doesn't pay for a per-frame gaussian blur) */}
+        <div
           style={{
             position: "absolute",
             inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            scale: 1.3,
-            filter: "blur(38px) saturate(1.25) brightness(0.55)",
-            opacity: 0.85,
+            background: `radial-gradient(ellipse 80% 70% at 50% 40%, ${university.accent}3d 0%, rgba(10,16,32,0.9) 62%, #070C18 100%)`,
           }}
         />
 
@@ -144,16 +139,14 @@ export const UniversityCard: React.FC<Props> = ({
           }}
         />
 
-        {/* film grain */}
+        {/* fine texture (cheap repeating gradient instead of per-frame dots) */}
         <div
           style={{
             position: "absolute",
             inset: 0,
-            opacity: 0.12,
+            opacity: 0.09,
             backgroundImage:
-              "radial-gradient(rgba(255,255,255,0.55) 0.6px, transparent 0.7px)",
-            backgroundSize: "7px 7px",
-            backgroundPosition: `${(frame * 0.35) % 7}px ${(frame * 0.6) % 7}px`,
+              "repeating-linear-gradient(0deg, rgba(255,255,255,0.5) 0px, rgba(255,255,255,0.5) 1px, transparent 1px, transparent 3px)",
             pointerEvents: "none",
           }}
         />
@@ -169,9 +162,8 @@ export const UniversityCard: React.FC<Props> = ({
             gap: 12,
             padding: "10px 18px 10px 14px",
             borderRadius: 999,
-            background: "rgba(8,13,27,0.66)",
+            background: "rgba(8,13,27,0.88)",
             border: "1px solid rgba(255,215,0,0.38)",
-            backdropFilter: "blur(12px)",
             scale: 1 + rankPulse * 0.06,
             zIndex: 4,
           }}
@@ -213,9 +205,8 @@ export const UniversityCard: React.FC<Props> = ({
             gap: 8,
             padding: "9px 15px",
             borderRadius: 999,
-            background: "rgba(8,13,27,0.66)",
+            background: "rgba(8,13,27,0.88)",
             border: "1px solid rgba(255,255,255,0.14)",
-            backdropFilter: "blur(12px)",
             zIndex: 4,
           }}
         >
@@ -251,9 +242,8 @@ export const UniversityCard: React.FC<Props> = ({
             gap: 10,
             padding: "9px 16px",
             borderRadius: 999,
-            background: "rgba(8,13,27,0.66)",
+            background: "rgba(8,13,27,0.88)",
             border: "1px solid rgba(255,255,255,0.14)",
-            backdropFilter: "blur(12px)",
             opacity: flagIn,
             translate: `0px ${(1 - flagIn) * 18}px`,
             zIndex: 4,
@@ -316,7 +306,6 @@ export const UniversityCard: React.FC<Props> = ({
             rotate: "16deg",
             background:
               "linear-gradient(90deg, transparent, rgba(255,248,214,0.22), transparent)",
-            filter: "blur(12px)",
             mixBlendMode: "screen",
             opacity: 0.85,
             pointerEvents: "none",

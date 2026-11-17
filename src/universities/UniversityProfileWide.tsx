@@ -138,7 +138,6 @@ export const UniversityProfileWide: React.FC<{
           top: -60,
           height: 900,
           background: `radial-gradient(ellipse 55% 50% at 50% 34%, ${university.accent}26 0%, ${university.accent}09 44%, transparent 72%)`,
-          filter: "blur(34px)",
           opacity: 0.9,
         }}
       />
@@ -155,7 +154,6 @@ export const UniversityProfileWide: React.FC<{
             rotate: "15deg",
             background:
               "linear-gradient(90deg, transparent, rgba(255,248,214,0.14), rgba(59,130,246,0.1), transparent)",
-            filter: "blur(28px)",
             mixBlendMode: "screen",
           }}
         />

@@ -69,7 +69,8 @@ export const StudentCounter: React.FC<Props> = ({
         opacity: enter,
         scale: interpolate(enter, [0, 1], [0.86, 1]) * (1 + bump * 0.03),
         translate: interpolate(enter, [0, 1], ["0px 26px", "0px 0px"]),
-        filter: `drop-shadow(0 18px 50px rgba(0,0,0,0.55)) drop-shadow(0 0 ${28 + bump * 22}px rgba(255,215,0,${0.2 + bump * 0.16}))`,
+        textShadow:
+          "0 10px 28px rgba(0,0,0,0.5), 0 0 26px rgba(255,215,0,0.16)",
       }}
     >
       <span

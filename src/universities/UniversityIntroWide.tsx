@@ -219,8 +219,7 @@ export const UniversityIntroWide: React.FC<{ durationInFrames: number }> = ({
             color: "transparent",
             opacity: numberIn,
             scale: interpolate(numberIn, [0, 1], [0.62, 1]) * (1 + settle * 0.03),
-            filter:
-              "drop-shadow(0 24px 60px rgba(255,215,0,0.26)) drop-shadow(0 0 40px rgba(255,215,0,0.2))",
+            textShadow: "0 12px 34px rgba(255,215,0,0.3)",
           }}
         >
           {count}

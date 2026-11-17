@@ -80,7 +80,6 @@ export const UniversityBackground: React.FC = () => {
           borderRadius: "50%",
           background:
             "radial-gradient(circle, rgba(255,215,0,0.18) 0%, rgba(255,215,0,0.05) 44%, transparent 70%)",
-          filter: "blur(72px)",
         }}
       />
 
@@ -95,7 +94,6 @@ export const UniversityBackground: React.FC = () => {
           borderRadius: "50%",
           background:
             "radial-gradient(circle, rgba(59,130,246,0.24) 0%, rgba(30,58,138,0.1) 46%, transparent 72%)",
-          filter: "blur(76px)",
         }}
       />
 
@@ -110,7 +108,6 @@ export const UniversityBackground: React.FC = () => {
           borderRadius: "50%",
           background:
             "radial-gradient(circle, rgba(59,130,246,0.18) 0%, rgba(30,58,138,0.09) 42%, rgba(255,215,0,0.03) 62%, transparent 72%)",
-          filter: "blur(40px)",
         }}
       />
 
@@ -169,7 +166,7 @@ export const UniversityBackground: React.FC = () => {
           backgroundImage:
             "linear-gradient(rgba(148,163,184,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,0.06) 1px, transparent 1px)",
           backgroundSize: "108px 108px",
-          backgroundPosition: `${(frame * 0.12) % 108}px ${(frame * 0.2) % 108}px`,
+          backgroundPosition: "0px 0px",
           maskImage:
             "radial-gradient(ellipse 82% 66% at 50% 44%, black 12%, transparent 80%)",
           WebkitMaskImage:
@@ -187,13 +184,13 @@ export const UniversityBackground: React.FC = () => {
             style={{
               position: "absolute",
               left: `${number.left}%`,
-              top: `${travel - 10}%`,
+              top: 0,
               fontFamily: displayFamily,
               fontSize: number.size,
               fontWeight: 700,
               color: "rgba(147,197,253,0.05)",
               rotate: `${number.drift + sway(3, 0.2, number.phase)}deg`,
-              textShadow: "0 0 30px rgba(59,130,246,0.08)",
+              translate: `0px ${((travel - 10) / 100) * height}px`,
             }}
           >
             {number.label}
@@ -209,21 +206,20 @@ export const UniversityBackground: React.FC = () => {
         const fade =
           Math.sin(Math.min(1, travel * 1.1) * Math.PI) *
           (0.3 + 0.7 * pseudoRandom(i + 313));
+        const tint = dust.blue ? "96,165,250" : "255,215,0";
         return (
           <div
             key={i}
             style={{
               position: "absolute",
-              left: `${x}%`,
-              top: `${y}%`,
-              width: dust.size,
-              height: dust.size,
+              left: `${dust.left}%`,
+              top: 0,
+              width: dust.size * 3,
+              height: dust.size * 3,
               borderRadius: "50%",
-              backgroundColor: dust.blue ? palette.blueSoft : palette.goldSoft,
-              opacity: fade * 0.5,
-              boxShadow: dust.blue
-                ? "0 0 12px rgba(96,165,250,0.7)"
-                : "0 0 14px rgba(255,215,0,0.75)",
+              background: `radial-gradient(circle, rgba(${tint},0.9) 0%, rgba(${tint},0.5) 22%, rgba(${tint},0.12) 48%, rgba(${tint},0) 74%)`,
+              opacity: fade * 0.55,
+              translate: `${(x - dust.left) * (width / 100) - dust.size}px ${(y / 100) * height - dust.size}px`,
             }}
           />
         );
@@ -235,7 +231,6 @@ export const UniversityBackground: React.FC = () => {
           backgroundImage:
             "repeating-linear-gradient(120deg, rgba(255,255,255,0.024) 0px, rgba(255,255,255,0.024) 1px, transparent 1px, transparent 18px)",
           opacity: 0.35,
-          mixBlendMode: "overlay",
         }}
       />
 
@@ -287,7 +282,6 @@ export const UniversityBackground: React.FC = () => {
           backgroundImage:
             "repeating-linear-gradient(0deg, rgba(255,255,255,0.028) 0px, rgba(255,255,255,0.028) 1px, transparent 1px, transparent 6px)",
           opacity: 0.18,
-          mixBlendMode: "overlay",
         }}
       />
     </AbsoluteFill>
