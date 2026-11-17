@@ -59,10 +59,31 @@ import {
   WIDE_HEIGHT as UNIVERSITY_WIDE_HEIGHT,
   WIDE_WIDTH as UNIVERSITY_WIDE_WIDTH,
 } from "./universities/MainVideo";
+import {
+  calculateMetadata as calculatePlacesMetadata,
+  FALLBACK_FRAMES as PLACES_FRAMES,
+  FPS as PLACES_FPS,
+  HEIGHT as PLACES_HEIGHT,
+  BeautifulPlaces,
+  WIDTH as PLACES_WIDTH,
+} from "./places/PlacesVideo";
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="BeautifulPlaces"
+        component={BeautifulPlaces}
+        durationInFrames={PLACES_FRAMES.reduce(
+          (sum, frames) => sum + frames,
+          0,
+        )}
+        fps={PLACES_FPS}
+        width={PLACES_WIDTH}
+        height={PLACES_HEIGHT}
+        defaultProps={{ sceneFrames: PLACES_FRAMES }}
+        calculateMetadata={calculatePlacesMetadata}
+      />
       <Composition
         id="MostDangerousArmies"
         component={MostDangerousArmies}

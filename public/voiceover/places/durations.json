@@ -1,0 +1,51 @@
+{
+  "01-intro": {
+    "seconds": 8.28,
+    "frames": 255
+  },
+  "10-ubud": {
+    "seconds": 7.92,
+    "frames": 244
+  },
+  "09-cappadocia": {
+    "seconds": 7.584,
+    "frames": 234
+  },
+  "08-serengeti": {
+    "seconds": 7.272,
+    "frames": 225
+  },
+  "07-banff": {
+    "seconds": 6.912,
+    "frames": 214
+  },
+  "06-bora-bora": {
+    "seconds": 6.72,
+    "frames": 208
+  },
+  "05-santorini": {
+    "seconds": 6.696,
+    "frames": 207
+  },
+  "04-iguazu": {
+    "seconds": 7.056,
+    "frames": 218
+  },
+  "03-ha-long": {
+    "seconds": 6.96,
+    "frames": 215
+  },
+  "02-machu-picchu": {
+    "seconds": 7.224,
+    "frames": 223
+  },
+  "01-jokulsarlon": {
+    "seconds": 7.272,
+    "frames": 225
+  },
+  "12-outro": {
+    "seconds": 5.832,
+    "frames": 181
+  },
+  "_totalFrames": 2649
+}

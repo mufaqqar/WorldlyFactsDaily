@@ -1,0 +1,43 @@
+{
+  "composition": "BeautifulPlaces",
+  "output": "out/most-beautiful-places.mp4",
+  "format": "1080x1920 (9:16), 30fps, 2649 frames / 88.3s",
+  "basis": {
+    "note": "There is no official ranking of the world's most beautiful places. The order below is an editorial selection made for presentation, not a published score or vote.",
+    "selection": "Ten places chosen for global recognition and visual contrast across terrain types (island, desert, savanna, alpine, lagoon, caldera coast, rainforest falls)."
+  },
+  "facts": "Only stable, verifiable figures are shown: UNESCO inscription years, park establishment dates, altitudes, island counts and the published fall count for Iguazu.",
+  "flags": {
+    "source": "flagcdn.com",
+    "license": "Flags are public domain in most jurisdictions; see https://flagcdn.com",
+    "files": [
+      "public/flags/id.png",
+      "public/flags/tr.png",
+      "public/flags/tz.png",
+      "public/flags/ca.png",
+      "public/flags/pf.png",
+      "public/flags/gr.png",
+      "public/flags/ar.png",
+      "public/flags/vn.png",
+      "public/flags/pe.png",
+      "public/flags/is.png"
+    ]
+  },
+  "imagery": {
+    "status": "No photographs bundled: Wikimedia upload endpoints returned HTTP 429 from this machine.",
+    "fallback": "Each place renders generated terrain art (see src/places/PlaceCard.tsx).",
+    "adding_photos": "Drop a 1600px-wide JPEG into public/places/ and set `image` on the matching entry in src/places/data.ts. The card switches automatically and the Ken Burns push stays."
+  },
+  "audio": {
+    "narration": {
+      "files": "public/voiceover/places/*.mp3 (12 clips, one per scene)",
+      "script": "scripts/voiceover_places.py",
+      "engine": "edge-tts en-US-GuyNeural (fallback)",
+      "elevenlabs": "Key in .env is valid for text-to-speech but has 0 credits remaining (quota_exceeded); regenerate with ElevenLabs after topping up by re-running scripts/voiceover_places.py.",
+      "durations": "public/voiceover/places/durations.json"
+    },
+    "music": "public/audio/music-cities.wav (original numpy synthesis)",
+    "sfx": "public/audio/sfx-*.wav (original synthesis)",
+    "licensing": "Music and SFX generated in-repo. Narration via the edge-tts fallback voice (Microsoft neural TTS)."
+  }
+}
