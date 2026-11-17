@@ -3,3 +3,6 @@ out/
 .remotion/
 *.log
 .DS_Store
+public/
+src/
+
