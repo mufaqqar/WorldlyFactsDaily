@@ -67,10 +67,31 @@ import {
   BeautifulPlaces,
   WIDTH as PLACES_WIDTH,
 } from "./places/PlacesVideo";
+import {
+  calculateMetadata as calculateFootballMetadata,
+  FALLBACK_FRAMES as FOOTBALL_FRAMES,
+  FPS as FOOTBALL_FPS,
+  HEIGHT as FOOTBALL_HEIGHT,
+  TopFootballPlayers,
+  WIDTH as FOOTBALL_WIDTH,
+} from "./football-players/MainVideo";
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="TopFootballPlayers"
+        component={TopFootballPlayers}
+        durationInFrames={FOOTBALL_FRAMES.reduce(
+          (sum, frames) => sum + frames,
+          0,
+        )}
+        fps={FOOTBALL_FPS}
+        width={FOOTBALL_WIDTH}
+        height={FOOTBALL_HEIGHT}
+        defaultProps={{ sceneFrames: FOOTBALL_FRAMES }}
+        calculateMetadata={calculateFootballMetadata}
+      />
       <Composition
         id="BeautifulPlaces"
         component={BeautifulPlaces}

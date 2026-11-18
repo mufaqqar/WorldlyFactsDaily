@@ -518,7 +518,7 @@ fallback voice, so the narrator never changes mid-video.
 | # | Scene | Content |
 |---|-------|---------|
 | 01 | Intro | 1 → 10 count-up, "TOP 10", title, duration pill, editorial note |
-| 02–11 | Ranks 10 → 1 | Postcard, flag chip, rank numeral, name, location, blurb, two stat boxes |
+| 02–11 | Ranks 10 → 1 | Place photo, flag chip, rank numeral, name, location, blurb, two stat boxes |
 | 12 | Outro | "10 places. One planet.", save prompt, question, attribution |
 
 ### Editing the places
@@ -530,13 +530,22 @@ fallback voice, so the narrator never changes mid-video.
 - **Scene lengths** — derived from audio by `calculateMetadata` in
   `src/places/PlacesVideo.tsx`; `FALLBACK_FRAMES` is the studio fallback
 - **Mix** — `MusicBed` volume and SFX levels in `src/places/PlacesVideo.tsx`
+- **Photos + credits** — `scripts/fetch_place_photos.py` (Openverse) → `public/places/photos.json`
 - **Flags** — `scripts/fetch_place_flags.py` (flagcdn.com)
 
-Every card renders generated terrain art. To use photographs instead, drop a
-JPEG into `public/places/` and set `image` on that entry in `data.ts` — the card
-switches to the photo and keeps the Ken Burns push. No photos are bundled
-because Wikimedia's upload host returned HTTP 429 from this machine; see
-`public/places/sources.json` for the attribution notes.
+Each card shows one photograph of the place, downloaded from
+[Openverse](https://openverse.org) by `scripts/fetch_place_photos.py`. The
+script keeps Creative-Commons / public-domain, tall, high-resolution images,
+publishes the full per-photo credit and source link in
+`public/places/photos.json`, and resizes them to ~700–850 × 1024 for the
+postcard. Generated terrain art remains as the fallback if an `image` path is
+missing; the Ken Burns push and scrim apply to both.
+
+To swap any photo, replace `public/places/<rank>-<slug>.jpg` (or point `image`
+in `data.ts` at a different file) and re-render. Attribution notes and the
+editorial basis live in `public/places/sources.json`. Most of the photos are
+CC BY / CC BY-SA, so include `photos.json` credits in the caption or post
+description if you publish this publicly.
 
 ## MufaqarIntro
 
@@ -698,7 +707,7 @@ src/
     RankWatermark.tsx       oversized rank numeral + 10-step rail
     ArmyOutro.tsx           scene 12 — top-3 recap + follow CTA
   places/                   vertical short — curated 10 most beautiful places
-    data.ts                 places, facts, chip labels, optional photo paths
+    data.ts                 places, facts, chip labels, photo + audio paths
     theme.ts                shared navy / gold palette + terrain palettes
     PlacesVideo.tsx         audio-driven timing, narration, score, SFX, global fade
     PlaceBackground.tsx     aurora, grid, drifting dust, vignette
@@ -719,6 +728,7 @@ scripts/
   audio_population.py       original numpy score synthesis (population)
   fetch_cities.py           Wikimedia city photos + flags
   fetch_place_flags.py      flagcdn flags for the places short
+  fetch_place_photos.py     Openverse place photos + credits (photos.json)
   replace_city_images.py    swap specific city images via Wikipedia media list
   check_audio_alignment.py  QA: narration clips vs. rendered mix (envelope NCC)
   qc_cities_frames.py       QA: OCR every settled scene from the MP4

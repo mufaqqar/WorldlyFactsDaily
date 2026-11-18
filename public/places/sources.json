@@ -24,9 +24,12 @@
     ]
   },
   "imagery": {
-    "status": "No photographs bundled: Wikimedia upload endpoints returned HTTP 429 from this machine.",
-    "fallback": "Each place renders generated terrain art (see src/places/PlaceCard.tsx).",
-    "adding_photos": "Drop a 1600px-wide JPEG into public/places/ and set `image` on the matching entry in src/places/data.ts. The card switches automatically and the Ken Burns push stays."
+    "status": "One Creative-Commons / public-domain photograph bundled per place.",
+    "provider": "Openverse (https://openverse.org) — search, selection and download by scripts/fetch_place_photos.py.",
+    "credits": "public/places/photos.json lists the title, creator, licence, source link and detail URL for every photo.",
+    "selection": "Tall, high-resolution, permissively licensed images whose titles describe the place; resort, map, poster and trail shots are excluded.",
+    "fallback": "If an image path is missing, the card renders generated terrain art (see src/places/PlaceCard.tsx).",
+    "swapping": "Replace public/places/<rank>-<slug>.jpg (or change `image` in src/places/data.ts), then re-render."
   },
   "audio": {
     "narration": {

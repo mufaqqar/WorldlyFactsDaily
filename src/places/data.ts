@@ -50,6 +50,7 @@ export const PLACES: Place[] = [
     statB: { label: "Elevation", value: "600 m" },
     accent: "#5EEAD4",
     audio: "voiceover/places/10-ubud.mp3",
+    image: "places/10-ubud.jpg",
   },
   {
     rank: 9,
@@ -64,6 +65,7 @@ export const PLACES: Place[] = [
     statB: { label: "Rock", value: "Volcanic tuff" },
     accent: "#FB923C",
     audio: "voiceover/places/09-cappadocia.mp3",
+    image: "places/09-cappadocia.jpg",
   },
   {
     rank: 8,
@@ -78,6 +80,7 @@ export const PLACES: Place[] = [
     statB: { label: "Migration", value: "~1.5M wildebeest" },
     accent: "#FDE047",
     audio: "voiceover/places/08-serengeti.mp3",
+    image: "places/08-serengeti.jpg",
   },
   {
     rank: 7,
@@ -92,6 +95,7 @@ export const PLACES: Place[] = [
     statB: { label: "Lake", value: "Moraine" },
     accent: "#93C5FD",
     audio: "voiceover/places/07-banff.mp3",
+    image: "places/07-banff.jpg",
   },
   {
     rank: 6,
@@ -106,6 +110,7 @@ export const PLACES: Place[] = [
     statB: { label: "Setting", value: "Barrier reef" },
     accent: "#67E8F9",
     audio: "voiceover/places/06-bora-bora.mp3",
+    image: "places/06-bora-bora.jpg",
   },
   {
     rank: 5,
@@ -120,6 +125,7 @@ export const PLACES: Place[] = [
     statB: { label: "Island group", value: "Cyclades" },
     accent: "#BFDBFE",
     audio: "voiceover/places/05-santorini.mp3",
+    image: "places/05-santorini.jpg",
   },
   {
     rank: 4,
@@ -134,6 +140,7 @@ export const PLACES: Place[] = [
     statB: { label: "Border", value: "Argentina · Brazil" },
     accent: "#6EE7B7",
     audio: "voiceover/places/04-iguazu.mp3",
+    image: "places/04-iguazu.jpg",
   },
   {
     rank: 3,
@@ -149,6 +156,7 @@ export const PLACES: Place[] = [
     accent: "#A5F3FC",
     chip: "Karst bay",
     audio: "voiceover/places/03-ha-long.mp3",
+    image: "places/03-ha-long.jpg",
   },
   {
     rank: 2,
@@ -164,6 +172,7 @@ export const PLACES: Place[] = [
     accent: "#FDBA74",
     chip: "Cloud forest",
     audio: "voiceover/places/02-machu-picchu.mp3",
+    image: "places/02-machu-picchu.jpg",
   },
   {
     rank: 1,
@@ -179,5 +188,6 @@ export const PLACES: Place[] = [
     accent: "#BAE6FD",
     chip: "Glacier lagoon",
     audio: "voiceover/places/01-jokulsarlon.mp3",
+    image: "places/01-jokulsarlon.jpg",
   },
 ];
