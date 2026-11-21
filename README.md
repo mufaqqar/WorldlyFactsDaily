@@ -1,11 +1,17 @@
 # Remotion videos
 
-Twelve compositions built with [Remotion](https://remotion.dev): three landscape
-1920×1080 videos and nine vertical 1080×1920 videos, most of them data stories
+> **Start here:** [`AGENTS.md`](./AGENTS.md) is the canonical daily-workflow file.
+> Read it before any new video task — it holds the standing format, voice,
+> asset, QA and render rules, plus the job log.
+
+Fifteen compositions built with [Remotion](https://remotion.dev): three landscape
+1920×1080 videos and ten vertical 1080×1920 videos, most of them data stories
 with voiceover.
 
 | Composition | Output | What it is |
 |---|---|---|
+| `TopCricketPlayers` | `out/top-cricket-players-2026.mp4` | ~127s narrated vertical (9:16) countdown — top 10 cricketers of 2026 by highest current ICC rating |
+| `TopLuxuryBikes` | `out/top-luxury-bikes-2026.mp4` | ~136s narrated vertical (9:16) countdown — the 10 most expensive bikes in India 2026 by ex-showroom price |
 | `BeautifulPlaces` | `out/most-beautiful-places.mp4` | 88s narrated vertical (9:16) short — the 10 most beautiful places on Earth, curated, voice + score |
 | `TopUniversitiesTablet` | `out/top-universities-2027-tablet.mp4` | 1920×1080 landscape cut of the universities countdown |
 | `TopUniversities` | `out/top-universities-2027.mp4` | Long-form vertical (9:16) countdown — QS World University Rankings 2027 |

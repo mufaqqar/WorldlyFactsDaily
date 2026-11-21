@@ -75,10 +75,73 @@ import {
   TopFootballPlayers,
   WIDTH as FOOTBALL_WIDTH,
 } from "./football-players/MainVideo";
+import {
+  calculateMetadata as calculateLuxuryCarsMetadata,
+  FALLBACK_FRAMES as LUXURY_CARS_FRAMES,
+  FPS as LUXURY_CARS_FPS,
+  HEIGHT as LUXURY_CARS_HEIGHT,
+  TopLuxuryCars,
+  WIDTH as LUXURY_CARS_WIDTH,
+} from "./luxury-cars/MainVideo";
+import {
+  calculateMetadata as calculateCricketMetadata,
+  FALLBACK_FRAMES as CRICKET_FRAMES,
+  FPS as CRICKET_FPS,
+  HEIGHT as CRICKET_HEIGHT,
+  TopCricketPlayers,
+  WIDTH as CRICKET_WIDTH,
+} from "./cricket-players/MainVideo";
+import {
+  calculateMetadata as calculateLuxuryBikesMetadata,
+  FALLBACK_FRAMES as LUXURY_BIKES_FRAMES,
+  FPS as LUXURY_BIKES_FPS,
+  HEIGHT as LUXURY_BIKES_HEIGHT,
+  TopLuxuryBikes,
+  WIDTH as LUXURY_BIKES_WIDTH,
+} from "./luxury-bikes/MainVideo";
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="TopCricketPlayers"
+        component={TopCricketPlayers}
+        durationInFrames={CRICKET_FRAMES.reduce(
+          (sum, frames) => sum + frames,
+          0,
+        )}
+        fps={CRICKET_FPS}
+        width={CRICKET_WIDTH}
+        height={CRICKET_HEIGHT}
+        defaultProps={{ sceneFrames: CRICKET_FRAMES }}
+        calculateMetadata={calculateCricketMetadata}
+      />
+      <Composition
+        id="TopLuxuryBikes"
+        component={TopLuxuryBikes}
+        durationInFrames={LUXURY_BIKES_FRAMES.reduce(
+          (sum, frames) => sum + frames,
+          0,
+        )}
+        fps={LUXURY_BIKES_FPS}
+        width={LUXURY_BIKES_WIDTH}
+        height={LUXURY_BIKES_HEIGHT}
+        defaultProps={{ sceneFrames: LUXURY_BIKES_FRAMES }}
+        calculateMetadata={calculateLuxuryBikesMetadata}
+      />
+      <Composition
+        id="TopLuxuryCars"
+        component={TopLuxuryCars}
+        durationInFrames={LUXURY_CARS_FRAMES.reduce(
+          (sum, frames) => sum + frames,
+          0,
+        )}
+        fps={LUXURY_CARS_FPS}
+        width={LUXURY_CARS_WIDTH}
+        height={LUXURY_CARS_HEIGHT}
+        defaultProps={{ sceneFrames: LUXURY_CARS_FRAMES }}
+        calculateMetadata={calculateLuxuryCarsMetadata}
+      />
       <Composition
         id="TopFootballPlayers"
         component={TopFootballPlayers}
