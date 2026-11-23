@@ -14,6 +14,15 @@
     "still:cricket": "remotion still TopCricketPlayers out/top-cricket-players-2026-thumbnail.png --frame=160",
     "build:luxury-bikes": "remotion render TopLuxuryBikes out/top-luxury-bikes-2026.mp4",
     "still:luxury-bikes": "remotion still TopLuxuryBikes out/top-luxury-bikes-2026-thumbnail.png --frame=160",
+    "build:warplanes": "remotion render TopWarplanes out/top-warplanes-2026.mp4",
+    "still:warplanes": "remotion still TopWarplanes out/top-warplanes-2026-thumbnail.png --frame=160",
+    "build:largest-companies": "remotion render TopLargestCompanies out/top-largest-companies-2026.mp4",
+    "still:largest-companies": "remotion still TopLargestCompanies out/top-largest-companies-2026-thumbnail.png --frame=160",
+    "build:largest-economies": "remotion render TopLargestEconomies out/top-largest-economies-2026.mp4",
+    "still:largest-economies": "remotion still TopLargestEconomies out/top-largest-economies-2026-thumbnail.png --frame=160",
+    "build:beautiful-capitals": "remotion render TopBeautifulCapitals out/top-beautiful-capitals-2026.mp4",
+    "still:beautiful-capitals": "remotion still TopBeautifulCapitals out/top-beautiful-capitals-2026-thumbnail.png --frame=160",
+    "build:educated-countries": "remotion render TopEducatedCountries out/top-educated-countries-2026.mp4",
     "upgrade": "remotion upgrade"
   },
   "dependencies": {

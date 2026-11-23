@@ -99,10 +99,115 @@ import {
   TopLuxuryBikes,
   WIDTH as LUXURY_BIKES_WIDTH,
 } from "./luxury-bikes/MainVideo";
+import {
+  calculateMetadata as calculateWarplanesMetadata,
+  FALLBACK_FRAMES as WARPLANES_FRAMES,
+  FPS as WARPLANES_FPS,
+  HEIGHT as WARPLANES_HEIGHT,
+  TopWarplanes,
+  WIDTH as WARPLANES_WIDTH,
+} from "./warplanes/MainVideo";
+import {
+  calculateMetadata as calculateLargestCompaniesMetadata,
+  FALLBACK_FRAMES as LARGEST_COMPANIES_FRAMES,
+  FPS as LARGEST_COMPANIES_FPS,
+  HEIGHT as LARGEST_COMPANIES_HEIGHT,
+  TopLargestCompanies,
+  WIDTH as LARGEST_COMPANIES_WIDTH,
+} from "./largest-companies/MainVideo";
+import {
+  calculateMetadata as calculateLargestEconomiesMetadata,
+  FALLBACK_FRAMES as LARGEST_ECONOMIES_FRAMES,
+  FPS as LARGEST_ECONOMIES_FPS,
+  HEIGHT as LARGEST_ECONOMIES_HEIGHT,
+  TopLargestEconomies,
+  WIDTH as LARGEST_ECONOMIES_WIDTH,
+} from "./largest-economies/MainVideo";
+import {
+  BeautifulCapitals,
+  calculateMetadata as calculateBeautifulCapitalsMetadata,
+  FALLBACK_FRAMES as BEAUTIFUL_CAPITALS_FRAMES,
+  FPS as BEAUTIFUL_CAPITALS_FPS,
+  HEIGHT as BEAUTIFUL_CAPITALS_HEIGHT,
+  WIDTH as BEAUTIFUL_CAPITALS_WIDTH,
+} from "./beautiful-capitals/CapitalsVideo";
+import {
+  calculateMetadata as calculateEducatedCountriesMetadata,
+  FALLBACK_FRAMES as EDUCATED_COUNTRIES_FRAMES,
+  FPS as EDUCATED_COUNTRIES_FPS,
+  HEIGHT as EDUCATED_COUNTRIES_HEIGHT,
+  TopEducatedCountries,
+  WIDTH as EDUCATED_COUNTRIES_WIDTH,
+} from "./educated-countries/MainVideo";
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="TopEducatedCountries"
+        component={TopEducatedCountries}
+        durationInFrames={EDUCATED_COUNTRIES_FRAMES.reduce(
+          (sum, frames) => sum + frames,
+          0,
+        )}
+        fps={EDUCATED_COUNTRIES_FPS}
+        width={EDUCATED_COUNTRIES_WIDTH}
+        height={EDUCATED_COUNTRIES_HEIGHT}
+        defaultProps={{ sceneFrames: EDUCATED_COUNTRIES_FRAMES }}
+        calculateMetadata={calculateEducatedCountriesMetadata}
+      />
+      <Composition
+        id="TopBeautifulCapitals"
+        component={BeautifulCapitals}
+        durationInFrames={BEAUTIFUL_CAPITALS_FRAMES.reduce(
+          (sum, frames) => sum + frames,
+          0,
+        )}
+        fps={BEAUTIFUL_CAPITALS_FPS}
+        width={BEAUTIFUL_CAPITALS_WIDTH}
+        height={BEAUTIFUL_CAPITALS_HEIGHT}
+        defaultProps={{ sceneFrames: BEAUTIFUL_CAPITALS_FRAMES }}
+        calculateMetadata={calculateBeautifulCapitalsMetadata}
+      />
+      <Composition
+        id="TopLargestEconomies"
+        component={TopLargestEconomies}
+        durationInFrames={LARGEST_ECONOMIES_FRAMES.reduce(
+          (sum, frames) => sum + frames,
+          0,
+        )}
+        fps={LARGEST_ECONOMIES_FPS}
+        width={LARGEST_ECONOMIES_WIDTH}
+        height={LARGEST_ECONOMIES_HEIGHT}
+        defaultProps={{ sceneFrames: LARGEST_ECONOMIES_FRAMES }}
+        calculateMetadata={calculateLargestEconomiesMetadata}
+      />
+      <Composition
+        id="TopLargestCompanies"
+        component={TopLargestCompanies}
+        durationInFrames={LARGEST_COMPANIES_FRAMES.reduce(
+          (sum, frames) => sum + frames,
+          0,
+        )}
+        fps={LARGEST_COMPANIES_FPS}
+        width={LARGEST_COMPANIES_WIDTH}
+        height={LARGEST_COMPANIES_HEIGHT}
+        defaultProps={{ sceneFrames: LARGEST_COMPANIES_FRAMES }}
+        calculateMetadata={calculateLargestCompaniesMetadata}
+      />
+      <Composition
+        id="TopWarplanes"
+        component={TopWarplanes}
+        durationInFrames={WARPLANES_FRAMES.reduce(
+          (sum, frames) => sum + frames,
+          0,
+        )}
+        fps={WARPLANES_FPS}
+        width={WARPLANES_WIDTH}
+        height={WARPLANES_HEIGHT}
+        defaultProps={{ sceneFrames: WARPLANES_FRAMES }}
+        calculateMetadata={calculateWarplanesMetadata}
+      />
       <Composition
         id="TopCricketPlayers"
         component={TopCricketPlayers}
