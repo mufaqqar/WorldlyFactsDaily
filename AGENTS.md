@@ -13,6 +13,8 @@ _Last updated: 2026-11-23_
 | Rule | Detail |
 | --- | --- |
 | Input | User supplies **only a topic**. Never ask for the same instructions again. |
+| Queue | `todo.md` at the repo root is the single source of truth. Read it **first** on every task; never build a topic marked `DONE`, and confirm any `REVIEW` topic before starting. |
+| Go-ahead | **Do not start a new video until the user explicitly says "go ahead".** Inspecting and arranging the queue is fine; building is not. |
 | Default format | **Mobile / vertical short video**: `1080 × 1920`, `30 fps`, ~60–150 s. |
 | Long format | Only when the user explicitly says "long", "detailed", "documentary", or gives a duration. Default is still vertical unless they explicitly ask for landscape. |
 | Voice | **ElevenLabs** first. Key lives in `.env`; any variable name containing `ELEVEN` is accepted (current name: `ELEVENLAB`). Read it, never print it. Voice `pNInz6obpgDQGcFmaJgB` (Adam), model `eleven_multilingual_v2`. |
@@ -28,7 +30,8 @@ _Last updated: 2026-11-23_
 
 ## 2. Workflow — follow these steps in order
 
-1. **Read this file** and check `git status --short` for user changes.
+1. **Read this file and `todo.md`** (first), and check `git status --short` for
+   user changes. Wait for the user's go-ahead before building anything.
 2. **Interpret the topic** as a countdown/ranking video unless told otherwise.
 3. **Research** the topic. Prefer primary sources (ICC, FIFA, official rankings,
    reputable encyclopedias). Record the source URL and "as of" date.
@@ -54,7 +57,8 @@ _Last updated: 2026-11-23_
 10. **Render** the MP4 with `npx remotion render <CompositionId> out/<slug>.mp4`
     and write the SEO copy to `out/<slug>-metadata.txt`.
 11. **Report** the two output paths, voice engine actually used, data source,
-    and any caveats. If the topic came from the Requested videos list in §5, remove that entry when delivered.
+    and any caveats. If the topic came from `todo.md`, mark that entry `DONE`
+    with the output path when delivered.
 
 ---
 
@@ -116,10 +120,10 @@ No standalone JS render scripts exist; npm `build:*` scripts wrap the CLI.
 
 ---
 
-## 5. Requested videos (to-do)
+## 5. Video queue — `todo.md`
 
-Add a topic below, one per line, e.g. `- Top 10 fastest animals`. I build the
-next video from this list, deliver the two files in `out/`, and remove the
-entry once done. No completion/status log and no thumbnails are kept.
-
-- 
+`todo.md` at the repo root is the authoritative list of requested topics,
+grouped by theme with a `PENDING` / `REVIEW` / `DONE` status for each item.
+Read it before every task, skip `DONE` items, confirm `REVIEW` items, and work
+only on the next `PENDING` topic after the user says "go ahead". On delivery,
+flip that item to `DONE` with its output path. No other status log is kept.

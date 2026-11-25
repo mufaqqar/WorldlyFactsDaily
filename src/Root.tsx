@@ -92,6 +92,14 @@ import {
   WIDTH as CRICKET_WIDTH,
 } from "./cricket-players/MainVideo";
 import {
+  calculateMetadata as calculateFastestHumansMetadata,
+  FALLBACK_FRAMES as FASTEST_HUMANS_FRAMES,
+  FPS as FASTEST_HUMANS_FPS,
+  HEIGHT as FASTEST_HUMANS_HEIGHT,
+  TopFastestHumans,
+  WIDTH as FASTEST_HUMANS_WIDTH,
+} from "./fastest-humans/MainVideo";
+import {
   calculateMetadata as calculateLuxuryBikesMetadata,
   FALLBACK_FRAMES as LUXURY_BIKES_FRAMES,
   FPS as LUXURY_BIKES_FPS,
@@ -139,6 +147,22 @@ import {
   TopEducatedCountries,
   WIDTH as EDUCATED_COUNTRIES_WIDTH,
 } from "./educated-countries/MainVideo";
+import {
+  calculateMetadata as calculateExpensiveThingsMetadata,
+  FALLBACK_FRAMES as EXPENSIVE_THINGS_FRAMES,
+  FPS as EXPENSIVE_THINGS_FPS,
+  HEIGHT as EXPENSIVE_THINGS_HEIGHT,
+  TopExpensiveThings,
+  WIDTH as EXPENSIVE_THINGS_WIDTH,
+} from "./expensive-things/MainVideo";
+import {
+  calculateMetadata as calculateBillionaireMansionsMetadata,
+  FALLBACK_FRAMES as BILLIONAIRE_MANSIONS_FRAMES,
+  FPS as BILLIONAIRE_MANSIONS_FPS,
+  HEIGHT as BILLIONAIRE_MANSIONS_HEIGHT,
+  TopBillionaireMansions,
+  WIDTH as BILLIONAIRE_MANSIONS_WIDTH,
+} from "./billionaire-mansions/MainVideo";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -220,6 +244,45 @@ export const RemotionRoot: React.FC = () => {
         height={CRICKET_HEIGHT}
         defaultProps={{ sceneFrames: CRICKET_FRAMES }}
         calculateMetadata={calculateCricketMetadata}
+      />
+      <Composition
+        id="TopFastestHumans"
+        component={TopFastestHumans}
+        durationInFrames={FASTEST_HUMANS_FRAMES.reduce(
+          (sum, frames) => sum + frames,
+          0,
+        )}
+        fps={FASTEST_HUMANS_FPS}
+        width={FASTEST_HUMANS_WIDTH}
+        height={FASTEST_HUMANS_HEIGHT}
+        defaultProps={{ sceneFrames: FASTEST_HUMANS_FRAMES }}
+        calculateMetadata={calculateFastestHumansMetadata}
+      />
+      <Composition
+        id="TopExpensiveThings"
+        component={TopExpensiveThings}
+        durationInFrames={EXPENSIVE_THINGS_FRAMES.reduce(
+          (sum, frames) => sum + frames,
+          0,
+        )}
+        fps={EXPENSIVE_THINGS_FPS}
+        width={EXPENSIVE_THINGS_WIDTH}
+        height={EXPENSIVE_THINGS_HEIGHT}
+        defaultProps={{ sceneFrames: EXPENSIVE_THINGS_FRAMES }}
+        calculateMetadata={calculateExpensiveThingsMetadata}
+      />
+      <Composition
+        id="TopBillionaireMansions"
+        component={TopBillionaireMansions}
+        durationInFrames={BILLIONAIRE_MANSIONS_FRAMES.reduce(
+          (sum, frames) => sum + frames,
+          0,
+        )}
+        fps={BILLIONAIRE_MANSIONS_FPS}
+        width={BILLIONAIRE_MANSIONS_WIDTH}
+        height={BILLIONAIRE_MANSIONS_HEIGHT}
+        defaultProps={{ sceneFrames: BILLIONAIRE_MANSIONS_FRAMES }}
+        calculateMetadata={calculateBillionaireMansionsMetadata}
       />
       <Composition
         id="TopLuxuryBikes"
